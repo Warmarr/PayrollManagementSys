@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 
 namespace PayrollManagementSys.Entity.Entities
 {
-    public class Departman
+    public class WorkDay
     {
         [Key]
-        public int Id { get; set; }
-        public string Name { get; set; }
-     
-        public virtual bool IsDeleted { get; set; } = false;
-        public ICollection<AppUser> Users { get; set; }
+        public int WorkDayId { get; set; }
+
+        public int PersonelId { get; set; }
+        public AppUser User { get; set; }
+        public DateTime WorkDate { get; set; }
+        public double WorkTime { get; set; }
     }
 }

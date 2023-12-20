@@ -8,13 +8,16 @@ using System.Threading.Tasks;
 
 namespace PayrollManagementSys.Entity.Entities
 {
-    public class Departman
+    public class DayOff
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-     
-        public virtual bool IsDeleted { get; set; } = false;
-        public ICollection<AppUser> Users { get; set; }
+    
+        public int PersonelId { get; set; }
+        public AppUser User { get; set; }
+        public string Type { get; set; }
+        public DateTime StartedDate_DayOff { get; set; }
+        public DateTime EndedDate_DayOff { get;set; }
+
     }
 }

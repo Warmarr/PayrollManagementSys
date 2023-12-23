@@ -16,14 +16,8 @@ namespace PayrollManagementSys.Data.Mappings
             builder.HasData(new Departman()
             {
                 Id = 1,
-                Name = "DenemeDepartman",
-                
-            },
-            new Departman()
-            {
-                Id = 2,
-                Name = "DenemeDepartman1",
-                
+                Name = "Yeni Departman",
+                IsDeleted = false,
             });
 
         }

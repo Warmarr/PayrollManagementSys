@@ -47,6 +47,7 @@ namespace PayrollManagementSys.Data.Mappings
 
             // Each User can have many entries in the UserRole join table
             builder.HasMany<AppUserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
+
             var superadmin = new AppUser
             {
                 Id = 1,
@@ -68,11 +69,10 @@ namespace PayrollManagementSys.Data.Mappings
             };
             superadmin.PasswordHash = CreatePasswordHash(superadmin, "123456");
 
-
             var admin = new AppUser
             {
                 Id = 2,
-                
+
                 UserName = "admin@gmail.com",
                 NormalizedUserName = "ADMIN@GMAIL.COM",
                 Email = "admin@gmail.com",
@@ -84,17 +84,14 @@ namespace PayrollManagementSys.Data.Mappings
                 PhoneNumberConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 Addres = "Kayseri",
-                DepertmanId = 2,
+                DepertmanId = 1,
                 Gender = "Erkek",
-                SGKNumara = "123457"
+                SGKNumara = "123457",
 
 
             };
             admin.PasswordHash = CreatePasswordHash(admin, "123456");
             builder.HasData(superadmin, admin);
-
-
-
         }
         private string CreatePasswordHash(AppUser user,string password)
         {

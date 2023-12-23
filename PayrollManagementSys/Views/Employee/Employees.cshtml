@@ -1,0 +1,63 @@
+﻿@model List<AppUser>
+@{
+    ViewData["Title"] = "Employees";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+<h1 class="mb-4">Çalışanlar</h1>
+
+
+
+<a class="btn btn-primary mb-4" href="/Employee/EmployeeAdd">Çalışan Ekle</a>
+
+<div b-4cazk3bw56 class="card">
+    <table id="employeesTable" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>E-Mail</th>
+                <th>Cinsiyet</th>
+                <th>Başlangıç Tarihi</th>
+                <th>Departman</th>
+                <th>Düzenle</th>
+                <th>Sil</th>
+          
+            </tr>
+        </thead>
+        <tbody>
+            
+                @foreach(var item in Model)
+                {<tr>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Email</td>
+                    <td>@item.Gender</td>
+                    <td>@item.StartedDate</td>
+                    <td>@item.DepertmanId</td>
+                    <td>
+                        <a class="btn btn-warning">Düzenle</a>
+                        
+                    </td>
+                    <td>
+                        <a class="btn btn-danger">Sil</a>
+                    </td>
+                    
+                </tr>
+                   
+                }
+                
+            
+        </tbody>
+</div>
+@section Scripts{
+    <script src="~/js/employeeIndex.js" type="application/ecmascript"></script>
+}
+

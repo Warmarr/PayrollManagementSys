@@ -14,7 +14,7 @@ namespace PayrollManagementSys.Entity.Entities
         public int Id { get; set; }
     
         public int PersonelId { get; set; }
-        public AppUser User { get; set; }
+        public AppUser Personel { get; set; }
         public string Type { get; set; }
         public DateTime StartedDate_DayOff { get; set; }
         public DateTime EndedDate_DayOff { get;set; }

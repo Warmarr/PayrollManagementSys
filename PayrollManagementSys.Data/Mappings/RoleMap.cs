@@ -37,24 +37,7 @@ namespace PayrollManagementSys.Data.Mappings
 
             // Each Role can have many associated RoleClaims
             builder.HasMany<AppRoleClaim>().WithOne().HasForeignKey(rc => rc.RoleId).IsRequired();
-            builder.HasData(
-                new AppRole
-                {
-                    Id = 1,
-                    Name = "Superadmin",
-                    ConcurrencyStamp = Guid.NewGuid().ToString(),
-                    NormalizedName = "SUPERADMIN"
-                },
-                new AppRole
-                {
-                    Id = 2,
-                    Name = "Admin",
-                    ConcurrencyStamp = Guid.NewGuid().ToString(),
-                    NormalizedName = "ADMIN"
-                }
-                );
-
-
+            
         }
     }
 }

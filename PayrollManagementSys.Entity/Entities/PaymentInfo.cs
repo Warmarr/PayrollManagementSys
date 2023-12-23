@@ -14,7 +14,7 @@ namespace PayrollManagementSys.Entity.Entities
         public int PaymentId { get; set; }
    
         public int PersonelId { get; set; }
-        public AppUser User { get; set; }
+        public AppUser Personel { get; set; }
         public DateTime PaymentDate { get; set; }
         public double PaymentAmount { get; set; }
         public string PaymentDescription { get; set; }

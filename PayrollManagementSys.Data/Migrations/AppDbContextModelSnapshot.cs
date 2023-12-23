@@ -50,22 +50,6 @@ namespace PayrollManagementSys.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ConcurrencyStamp = "c4a5e943-92ca-461b-851b-32d639563231",
-                            Name = "Superadmin",
-                            NormalizedName = "SUPERADMIN"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ConcurrencyStamp = "0b99265a-3d14-4659-b5a0-c1228fd06959",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        });
                 });
 
             modelBuilder.Entity("PayrollManagementSys.Entity.Entities.AppRoleClaim", b =>
@@ -200,7 +184,7 @@ namespace PayrollManagementSys.Data.Migrations
                             AccessFailedCount = 0,
                             Addres = "Kayseri",
                             BirtDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "45ba9d08-2ba5-41c8-9566-e222abdbf406",
+                            ConcurrencyStamp = "8ac11170-804b-4499-b09f-5fde0f9e7b8d",
                             DepertmanId = 1,
                             Email = "superadmin@gmail.com",
                             EmailConfirmed = true,
@@ -211,11 +195,11 @@ namespace PayrollManagementSys.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPERADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGRc/SPktBvKWAQsRyd0/tY1DoWlu1EZw5iEcgdgfLWhGzDTCbe+xj7Zh2mEu94nyQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELILKa5zsMiz17bHsbVlZuEg2nM1UXJeALcrv26jN8B6YqlqNK6PwA/XHWNfCpZigA==",
                             PhoneNumber = "+905439999999",
                             PhoneNumberConfirmed = true,
                             SGKNumara = "123456",
-                            SecurityStamp = "329a556b-6a7b-4a83-8662-b4100e7d047a",
+                            SecurityStamp = "7256dbe7-ffe9-4ad1-bd1a-259ecf39c0e9",
                             StartedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TwoFactorEnabled = false,
                             UserName = "superadmin@gmail.com"
@@ -226,8 +210,8 @@ namespace PayrollManagementSys.Data.Migrations
                             AccessFailedCount = 0,
                             Addres = "Kayseri",
                             BirtDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "14266f8e-08d8-4712-9e3a-c3d00b583f8b",
-                            DepertmanId = 2,
+                            ConcurrencyStamp = "a8f2256a-53c1-4221-ad59-e58acad8ec57",
+                            DepertmanId = 1,
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -237,11 +221,11 @@ namespace PayrollManagementSys.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEmpeYvaWn/thPq8GsWkb46HzCaR31KbSi4h06cONIsBn+41MIEo2yj+ttZcRCOw4A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHMossezgfSYjZgy/xbn5tEEXDqWvIKS+BWVewwcDgi+SV8hhT6alUh/34+b/g1ndA==",
                             PhoneNumber = "+905439999988",
                             PhoneNumberConfirmed = true,
                             SGKNumara = "123457",
-                            SecurityStamp = "f5023c5e-b9b5-4458-b530-39c6fc2c17db",
+                            SecurityStamp = "d537d684-7688-46dc-9f73-d48597f572b2",
                             StartedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
@@ -306,18 +290,6 @@ namespace PayrollManagementSys.Data.Migrations
                     b.HasKey("UserId", "RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            RoleId = 1
-                        },
-                        new
-                        {
-                            UserId = 2,
-                            RoleId = 2
-                        });
                 });
 
             modelBuilder.Entity("PayrollManagementSys.Entity.Entities.AppUserToken", b =>
@@ -360,12 +332,9 @@ namespace PayrollManagementSys.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("PersonelId");
 
                     b.ToTable("DayOffs");
                 });
@@ -394,13 +363,7 @@ namespace PayrollManagementSys.Data.Migrations
                         {
                             Id = 1,
                             IsDeleted = false,
-                            Name = "DenemeDepartman"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsDeleted = false,
-                            Name = "DenemeDepartman1"
+                            Name = "Yeni Departman"
                         });
                 });
 
@@ -425,12 +388,9 @@ namespace PayrollManagementSys.Data.Migrations
                     b.Property<int>("PersonelId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("PaymentId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("PersonelId");
 
                     b.ToTable("PaymentInfos");
                 });
@@ -444,9 +404,6 @@ namespace PayrollManagementSys.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SalaryId"));
 
                     b.Property<double>("AdditionalPayments")
-                        .HasColumnType("float");
-
-                    b.Property<double>("NetSalary")
                         .HasColumnType("float");
 
                     b.Property<int>("PersonelId")
@@ -464,12 +421,9 @@ namespace PayrollManagementSys.Data.Migrations
                     b.Property<double>("TaxDeduction")
                         .HasColumnType("float");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("SalaryId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("PersonelId");
 
                     b.ToTable("Salaries");
                 });
@@ -485,9 +439,6 @@ namespace PayrollManagementSys.Data.Migrations
                     b.Property<int>("PersonelId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("WorkDate")
                         .HasColumnType("datetime2");
 
@@ -496,7 +447,7 @@ namespace PayrollManagementSys.Data.Migrations
 
                     b.HasKey("WorkDayId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("PersonelId");
 
                     b.ToTable("WorkDays");
                 });
@@ -559,46 +510,46 @@ namespace PayrollManagementSys.Data.Migrations
 
             modelBuilder.Entity("PayrollManagementSys.Entity.Entities.DayOff", b =>
                 {
-                    b.HasOne("PayrollManagementSys.Entity.Entities.AppUser", "User")
+                    b.HasOne("PayrollManagementSys.Entity.Entities.AppUser", "Personel")
                         .WithMany("DayOffs")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("PersonelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Personel");
                 });
 
             modelBuilder.Entity("PayrollManagementSys.Entity.Entities.PaymentInfo", b =>
                 {
-                    b.HasOne("PayrollManagementSys.Entity.Entities.AppUser", "User")
+                    b.HasOne("PayrollManagementSys.Entity.Entities.AppUser", "Personel")
                         .WithMany("PaymentInfos")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("PersonelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Personel");
                 });
 
             modelBuilder.Entity("PayrollManagementSys.Entity.Entities.Salary", b =>
                 {
-                    b.HasOne("PayrollManagementSys.Entity.Entities.AppUser", "User")
+                    b.HasOne("PayrollManagementSys.Entity.Entities.AppUser", "Personel")
                         .WithMany("Salaries")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("PersonelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Personel");
                 });
 
             modelBuilder.Entity("PayrollManagementSys.Entity.Entities.WorkDay", b =>
                 {
-                    b.HasOne("PayrollManagementSys.Entity.Entities.AppUser", "User")
+                    b.HasOne("PayrollManagementSys.Entity.Entities.AppUser", "Personel")
                         .WithMany("WorkDays")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("PersonelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Personel");
                 });
 
             modelBuilder.Entity("PayrollManagementSys.Entity.Entities.AppUser", b =>

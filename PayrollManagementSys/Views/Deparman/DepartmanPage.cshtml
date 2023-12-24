@@ -1,4 +1,4 @@
-﻿@model List<Departman>
+﻿@model List<DepartmanDto>
 @{
     ViewData["Title"] = "DepartmanPage";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,6 +11,12 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+
+@{
+    string color = "";
+}
+
 <h1 class="mb-4">Departmanlar</h1>
 
 
@@ -28,25 +34,35 @@
             </tr>
         </thead>
         <tbody>
-            
-                @foreach(var item in Model)
-                {<tr>
+
+            @foreach (var item in Model)
+            {
+
+                if (item.IsDeleted == false)
+                {
+                    color = "limegreen";
+                }
+                else
+                {
+                    color = "red";
+                }
+                <tr>
                     <td>@item.Name</td>
-                    <td>@(item.IsDeleted ? "Pasif" : "Aktif")</td>
-                
+                    <td style="color:@color">@(item.IsDeleted ? "Pasif" : "Aktif")</td>
+
                     <td>
-                        <a class="btn btn-warning" data-id="@item.Id" asp-controller="Departman" asp-action="DepartmanPage" asp-route-departmanId="@item.Id">Düzenle</a>
-                        
+                        <a class="btn btn-warning" data-id="@item.Id" asp-controller="Deparman" asp-action="DepartmanUpdate" asp-route-departmanId="@item.Id">Düzenle</a>
+
                     </td>
                     <td>
                         <a class="btn btn-danger">Sil</a>
                     </td>
-                    
+
                 </tr>
-                   
-                }                      
+
+            }
         </tbody>
-</script>
+        </script>
 </div>
 @section Scripts{
     <script src="~/js/employeeIndex.js" type="application/ecmascript"></script>

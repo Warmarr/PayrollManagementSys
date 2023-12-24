@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PayrollManagementSys.Data.Context
 {
-    public class AppDbContext :DbContext    
+    public class AppDbContext :IdentityDbContext<AppUser,AppRole,int,AppUserClaim,AppUserRole,AppUserLogin,AppRoleClaim,AppUserToken>
     {
         public AppDbContext()
         {

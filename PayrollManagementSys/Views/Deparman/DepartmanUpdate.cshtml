@@ -7,8 +7,9 @@
 <h1>Departman Ekleme</h1>
 
 <div b-4cazk3bw56 class="card" style="padding:10px;">
-    <form asp-controller="Deparman" asp-action="DepartmanAdd" method="post" enctype="multipart/form-data">
+    <form asp-controller="Deparman" asp-action="DepartmanUpdate" method="post" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" asp-for="Id"/>
         <div class="form-group">
 
             <label asp-for="Name" id="defaultFormControlInput" class="form-label">Departman Adı</label>

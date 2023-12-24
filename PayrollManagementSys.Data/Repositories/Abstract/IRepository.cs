@@ -16,6 +16,8 @@ namespace PayrollManagementSys.Data.Repositories.Abstract
         Task<T> GetAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
         Task<T> GetByIdAsync(int id);
         Task<int> CountAsync(Expression<Func<T, bool>> predicate = null);
+        Task DepartmanAddAsync(string departmanName);
+        Task DepartmanUpdateAsync(string departmanName, int departmanId);
 
 
     }

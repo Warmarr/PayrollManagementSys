@@ -4,6 +4,16 @@
 <div b-4cazk3bw56 class="card" style="padding:10px;">
     <form asp-controller="Employee" asp-action="Add" method="post" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly"></div>
+
+        <div class="form-group">
+            <label>Depertman</label>
+            <select id="categoryList" onchange="change();" class="form-control mb-3" asp-for=DepertmanId>
+                <option value="1">Yeni Departman</option>
+                <option value="2">Rol</option>
+                <option value="3">Naber</option>
+
+            </select>
+        </div>
         <div class="form-group">
 
             <label asp-for="FirstName" id="defaultFormControlInput" class="form-label">Adı</label>
@@ -44,19 +54,27 @@
             <label asp-for="PhoneNumber" id="defaultFormControlInput" class="form-label"> Telefon Numarası</label>
             <input asp-for="PhoneNumber" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Telefon" aria-describedby="defaultFormControlHelp">
         </div>
-        <div class="form-group">
+      
+        <div class="form-group" id="container">
             <label asp-for="PasswordHash" id="defaultFormControlInput" class="form-label"> Şifre</label>
             <input asp-for="PasswordHash" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Şifre" aria-describedby="defaultFormControlHelp">
         </div>
         <div class="form-group">
-            <label>Depertman</label>
-            <select id="categoryList" class="form-control mb-3" asp-for=DepertmanId>
-                <option value="1">Yeni Departman</option>
-            </select>
-        </div>
-
-        <div class="form-group">
             <button type="submit" class="btn btn-outline-primary"> Kaydet </button>
         </div>
     </form>
+
+    <script type="text/javascript">
+      
+        });
+        function change() {
+            var select = document.getElementById("slct");
+            var divv = document.getElementById("container");
+            var value = select.value;
+            if (value == 1 || value == 2) {
+                toAppend = "<input type='textbox' >"; divv.innerHTML = toAppend; return;
+            }
+           
+        }
+    </script>
 </div>

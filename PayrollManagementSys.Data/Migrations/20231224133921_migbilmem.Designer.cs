@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PayrollManagementSys.Data.Context;
 
@@ -11,9 +12,11 @@ using PayrollManagementSys.Data.Context;
 namespace PayrollManagementSys.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231224133921_migbilmem")]
+    partial class migbilmem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -184,7 +187,7 @@ namespace PayrollManagementSys.Data.Migrations
                             AccessFailedCount = 0,
                             Addres = "Kayseri",
                             BirtDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "bf3a8295-280e-4b1e-97cf-496cbc97d202",
+                            ConcurrencyStamp = "dd93fbbc-d82e-4cf8-8437-f14ada9745fe",
                             DepertmanId = 1,
                             Email = "superadmin@gmail.com",
                             EmailConfirmed = true,
@@ -195,12 +198,12 @@ namespace PayrollManagementSys.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPERADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELbp3HQ13eaYgUv4/fg0ZVCkM4TKeI6n8wkjkBbAsNaQHWlJRe57qTdk9vdJbEB0RA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGMdLASh5Ys4MoMH9EyoznLcmybPgw1ppkpRiVwS6Uttj3zXuWqCopdVBVzw/XSbCw==",
                             PhoneNumber = "+905439999999",
                             PhoneNumberConfirmed = true,
                             SGKNumara = "123456",
-                            SecurityStamp = "6c0ee12f-e163-401d-84e8-46cf2d7abbaa",
-                            StartedDate = new DateTime(2023, 12, 24, 18, 34, 25, 345, DateTimeKind.Local).AddTicks(5137),
+                            SecurityStamp = "aeea519e-113c-4ad0-8137-2774b3db410f",
+                            StartedDate = new DateTime(2023, 12, 24, 16, 39, 21, 105, DateTimeKind.Local).AddTicks(8273),
                             TwoFactorEnabled = false,
                             UserName = "superadmin@gmail.com"
                         },
@@ -210,7 +213,7 @@ namespace PayrollManagementSys.Data.Migrations
                             AccessFailedCount = 0,
                             Addres = "Kayseri",
                             BirtDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "10941699-4f7f-4661-b611-43e1b338a68d",
+                            ConcurrencyStamp = "77f1d526-3ecf-48c6-9bc3-3550d53398c3",
                             DepertmanId = 1,
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
@@ -221,12 +224,12 @@ namespace PayrollManagementSys.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDAtq1g0KERth5bemqmU6rvJA+XSRfsdR97UA4sjHhGuAaFNxIk0IcE6OAyak1PUPw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGn/xCHX5b4vJx91h6GRkf9Jhp3ybXooLyo43Sf5hWVScJAv+Gc1S3LHbOgp5Dijnw==",
                             PhoneNumber = "+905439999988",
                             PhoneNumberConfirmed = true,
                             SGKNumara = "123457",
-                            SecurityStamp = "7aef2b22-7b07-4c3c-8f76-0a56de65f324",
-                            StartedDate = new DateTime(2023, 12, 24, 18, 34, 25, 389, DateTimeKind.Local).AddTicks(8492),
+                            SecurityStamp = "348dd89b-9032-44ce-8a02-400a8a27a28d",
+                            StartedDate = new DateTime(2023, 12, 24, 16, 39, 21, 198, DateTimeKind.Local).AddTicks(4493),
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         });
@@ -288,8 +291,6 @@ namespace PayrollManagementSys.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
@@ -494,12 +495,6 @@ namespace PayrollManagementSys.Data.Migrations
 
             modelBuilder.Entity("PayrollManagementSys.Entity.Entities.AppUserRole", b =>
                 {
-                    b.HasOne("PayrollManagementSys.Entity.Entities.AppRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("PayrollManagementSys.Entity.Entities.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")

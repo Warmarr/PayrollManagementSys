@@ -2,12 +2,19 @@ using Microsoft.AspNetCore.Identity;
 using PayrollManagementSys.Data.Context;
 using PayrollManagementSys.Data.Extensions;
 using PayrollManagementSys.Entity.Entities;
+using PayrollManagementSys.Service.Extensions;
+
+
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 
 builder.Services.LoadDataLayerExtensions(builder.Configuration);
+
+builder.Services.LoadServiceLayerExtension();
 
 
 
@@ -68,6 +75,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Auth}/{action=Login}/{id?}");
 
 app.Run();

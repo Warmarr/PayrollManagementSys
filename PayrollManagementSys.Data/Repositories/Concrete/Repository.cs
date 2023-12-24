@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using PayrollManagementSys.Data.Context;
 using PayrollManagementSys.Data.Repositories.Abstract;
 using System;
@@ -75,6 +76,18 @@ namespace PayrollManagementSys.Data.Repositories.Concrete
         {
             await Task.Run(()=>table.Update(entity));
             return entity;
+        }
+        public async Task DepartmanAddAsync(string departmanName)
+        {
+            var departmanNameParam = new SqlParameter("@Name", departmanName);
+            await dbContext.Database.ExecuteSqlRawAsync("EXECUTE InsertDepartman @Name",parameters: new[] { departmanNameParam });
+        }
+        public async Task DepartmanUpdateAsync(string departmanName,int departmanId)
+        {
+            var departmanNameParam = new SqlParameter("@Name", departmanName);
+            var departmanIdParam = new SqlParameter("@Id", departmanId);
+            await dbContext.Database.ExecuteSqlRawAsync("EXECUTE UpdateDepartman @Id,@Name",parameters: new[] { departmanIdParam, departmanNameParam });
+
         }
     }
 }

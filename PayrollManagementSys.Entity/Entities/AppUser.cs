@@ -20,7 +20,7 @@ namespace PayrollManagementSys.Entity.Entities
         public int DepertmanId { get; set; }
         public virtual Departman Departman { get; set; }
         public string Addres { get; set; }
-        public DateTime StartedDate { get; set; }
+        public DateTime StartedDate { get; set; } = DateTime.Now;
         public string SGKNumara { get; set; }
         public virtual bool IsDeleted { get; set; } = false;
         public ICollection<Salary> Salaries { get; set; }

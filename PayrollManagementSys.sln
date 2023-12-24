@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayrollManagementSys.Web", "PayrollManagementSys\PayrollManagementSys.Web.csproj", "{514EFCD1-5476-4C23-9499-62C36BB27805}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayrollManagementSys.Web", "PayrollManagementSys\PayrollManagementSys.Web.csproj", "{514EFCD1-5476-4C23-9499-62C36BB27805}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayrollManagementSys.Entity", "PayrollManagementSys.Entity\PayrollManagementSys.Entity.csproj", "{BD6DF5F4-2D81-4686-9213-B5913DED1B1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayrollManagementSys.Entity", "PayrollManagementSys.Entity\PayrollManagementSys.Entity.csproj", "{BD6DF5F4-2D81-4686-9213-B5913DED1B1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayrollManagementSys.Data", "PayrollManagementSys.Data\PayrollManagementSys.Data.csproj", "{83693E91-7607-4F97-B08E-BBA470F9CC04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayrollManagementSys.Data", "PayrollManagementSys.Data\PayrollManagementSys.Data.csproj", "{83693E91-7607-4F97-B08E-BBA470F9CC04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayrollManagementSys.Service", "PayrollManagementSys.Service\PayrollManagementSys.Service.csproj", "{BC2FDA5F-259E-4650-8690-D8DB69F0947E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayrollManagementSys.Core", "PayrollManagementSys.Core\PayrollManagementSys.Core.csproj", "{8732D262-29D1-4739-9347-BEDE7EB0EF5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayrollManagementSys.Core", "PayrollManagementSys.Core\PayrollManagementSys.Core.csproj", "{8732D262-29D1-4739-9347-BEDE7EB0EF5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PayrollManagementSys.Service", "PayrollManagementSys.Service\PayrollManagementSys.Service.csproj", "{54ED45A6-7021-4F10-9EC7-57936B4226A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +31,14 @@ Global
 		{83693E91-7607-4F97-B08E-BBA470F9CC04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83693E91-7607-4F97-B08E-BBA470F9CC04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83693E91-7607-4F97-B08E-BBA470F9CC04}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BC2FDA5F-259E-4650-8690-D8DB69F0947E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC2FDA5F-259E-4650-8690-D8DB69F0947E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC2FDA5F-259E-4650-8690-D8DB69F0947E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC2FDA5F-259E-4650-8690-D8DB69F0947E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8732D262-29D1-4739-9347-BEDE7EB0EF5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8732D262-29D1-4739-9347-BEDE7EB0EF5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8732D262-29D1-4739-9347-BEDE7EB0EF5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8732D262-29D1-4739-9347-BEDE7EB0EF5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54ED45A6-7021-4F10-9EC7-57936B4226A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54ED45A6-7021-4F10-9EC7-57936B4226A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54ED45A6-7021-4F10-9EC7-57936B4226A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54ED45A6-7021-4F10-9EC7-57936B4226A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

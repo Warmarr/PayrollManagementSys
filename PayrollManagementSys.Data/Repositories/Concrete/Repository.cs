@@ -1,9 +1,13 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using PayrollManagementSys.Data.Context;
 using PayrollManagementSys.Data.Repositories.Abstract;
+using PayrollManagementSys.Entity.DTOs.Employees;
+using PayrollManagementSys.Entity.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -87,6 +91,34 @@ namespace PayrollManagementSys.Data.Repositories.Concrete
             var departmanNameParam = new SqlParameter("@Name", departmanName);
             var departmanIdParam = new SqlParameter("@Id", departmanId);
             await dbContext.Database.ExecuteSqlRawAsync("EXECUTE UpdateDepartman @Id,@Name",parameters: new[] { departmanIdParam, departmanNameParam });
+
+        }
+        public async Task DepartmanSafeDelete(int departmanId)
+        {
+           
+            var departmanIdParam = new SqlParameter("@Id", departmanId);
+            var IsDeleted = new SqlParameter("@Deleted", 1);
+
+            await dbContext.Database.ExecuteSqlRawAsync("EXECUTE sp_UpdateDepartmanIsDeleted @Id,@Deleted", parameters: new[] { departmanIdParam, IsDeleted });
+
+        }
+        public async Task EmployeeAddAsync(EmployeeAddDto employeeAddDto,string password)
+        {
+            var passwordParam = new SqlParameter("@Password", password);
+            var firstNameParam = new SqlParameter("@FirstName", employeeAddDto.FirstName);
+            var lastNameParam = new SqlParameter("@LastName", employeeAddDto.LastName);
+            var genderParam = new SqlParameter("@Gender", employeeAddDto.Gender);
+            var birthDateParam = new SqlParameter("@BirthDate", employeeAddDto.BirtDate);
+            var departmanParam = new SqlParameter("@DepartmentId", SqlDbType.Int);
+            departmanParam.Value = employeeAddDto.DepertmanId;
+            var addressParam = new SqlParameter("@Address", employeeAddDto.Addres);
+            var sgkNumParam = new SqlParameter("@SGKNumara", employeeAddDto.SGKNumara);
+            var userNameParam = new SqlParameter("@UserName", employeeAddDto.UserName);
+            var emailParam = new SqlParameter("@Email",employeeAddDto.Email);
+            var phoneNumberParam = new SqlParameter("@PhoneNumber", employeeAddDto.PhoneNumber);
+
+            await dbContext.Database.ExecuteSqlRawAsync("EXECUTE InsertEmployee @FirstName,@LastName,@Gender,@DepartmentId,@Address,@BirthDate,@SGKNumara,@UserName,@Email,@PhoneNumber,@Password", parameters: 
+                new[] { firstNameParam, lastNameParam, genderParam, departmanParam, addressParam, birthDateParam,  sgkNumParam, userNameParam, emailParam, phoneNumberParam, passwordParam });
 
         }
     }

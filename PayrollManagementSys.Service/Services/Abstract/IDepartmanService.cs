@@ -13,5 +13,8 @@ namespace PayrollManagementSys.Service.Services.Abstract
         Task DepartmanAddAsync(DepartmanDto departmanDto);
         Task<DepartmanDto> GetDepartmanById(int id);
         Task DepartmanUpdateAsync(DepartmanDto departmanDto);
+        Task DepartmanSafeDeleteAsync(int departmanId);
+
+
     }
 }

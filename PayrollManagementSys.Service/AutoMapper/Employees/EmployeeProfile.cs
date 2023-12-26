@@ -15,6 +15,7 @@ namespace PayrollManagementSys.Service.AutoMapper.Employees
         {
             CreateMap<EmployeeDto, AppUser>().ReverseMap();
             CreateMap<EmployeeLoginDto, AppUser>().ReverseMap();
+            CreateMap<EmployeeAddDto,AppUser>().ReverseMap();
         }
     }
 }

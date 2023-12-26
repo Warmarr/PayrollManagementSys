@@ -46,8 +46,12 @@ namespace PayrollManagementSys.Service.Services.Concrete
             await unitOfWork.GetRepository<Departman>().DepartmanUpdateAsync(departmanDto.Name,departmanDto.Id);
             await unitOfWork.SaveAsync();
            
-            
-            
+                    
+        }
+        public async Task DepartmanSafeDeleteAsync(int departmanId)
+        {
+            await unitOfWork.GetRepository<Departman>().DepartmanSafeDelete(departmanId);
+            await unitOfWork.SaveAsync();
         }
     }
 }

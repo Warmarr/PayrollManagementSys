@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PayrollManagementSys.Entity.DTOs.Employees;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -18,6 +19,9 @@ namespace PayrollManagementSys.Data.Repositories.Abstract
         Task<int> CountAsync(Expression<Func<T, bool>> predicate = null);
         Task DepartmanAddAsync(string departmanName);
         Task DepartmanUpdateAsync(string departmanName, int departmanId);
+        Task DepartmanSafeDelete(int departmanId);
+        Task EmployeeAddAsync(EmployeeAddDto employeeAddDto, string password);
+
 
 
     }

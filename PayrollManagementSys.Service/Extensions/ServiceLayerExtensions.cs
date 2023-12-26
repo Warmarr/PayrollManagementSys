@@ -28,6 +28,7 @@ namespace PayrollManagementSys.Service.Extensions
             services.AddControllersWithViews().AddFluentValidation(opt =>
             {
                 opt.RegisterValidatorsFromAssemblyContaining<DepartmanValidator>();
+                opt.RegisterValidatorsFromAssemblyContaining<EmployeeValidator>();
                 opt.DisableDataAnnotationsValidation = true;
                 opt.ValidatorOptions.LanguageManager.Culture = new CultureInfo("tr");
             });

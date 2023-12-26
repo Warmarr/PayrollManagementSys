@@ -75,5 +75,6 @@ namespace PayrollManagementSys.Web.Controllers
             return View(departman);
         }
 
+
     }
 }

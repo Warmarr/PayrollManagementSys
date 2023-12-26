@@ -38,5 +38,13 @@ namespace PayrollManagementSys.Service.Services.Concrete
         {
             throw new NotImplementedException();
         }
+        public async Task CreateEmployeeAsync(EmployeeAddDto employeeAddDto)
+        {
+            var passwordhasher = new PasswordHasher<AppUser>();
+            string hashedPassword = passwordhasher.HashPassword(null, employeeAddDto.PasswordHash);
+            await unitOfWork.GetRepository<AppUser>().EmployeeAddAsync(employeeAddDto, hashedPassword);
+
+
+        }
     }
 }

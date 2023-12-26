@@ -1,5 +1,6 @@
 ﻿using PayrollManagementSys.Entity.DTOs.Employees;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,6 @@ namespace PayrollManagementSys.Service.Services.Abstract
     public interface IEmployeeService
     {
         Task<List<EmployeeDto>> GetAllEmployeeAsync();
+        Task CreateEmployeeAsync(EmployeeAddDto employeeAddDto);
     }
 }

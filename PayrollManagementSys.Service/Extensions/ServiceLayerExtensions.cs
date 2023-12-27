@@ -1,5 +1,6 @@
 ﻿using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
+using PayrollManagementSys.Entity.Entities;
 using PayrollManagementSys.Service.FluentValidation;
 using PayrollManagementSys.Service.Services.Abstract;
 using PayrollManagementSys.Service.Services.Concrete;
@@ -21,6 +22,8 @@ namespace PayrollManagementSys.Service.Extensions
 
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IDepartmanService, DepartmanService>();
+            services.AddScoped<ISalaryService, SalaryService>();
+
 
             services.AddAutoMapper(assembly);
 
@@ -30,6 +33,7 @@ namespace PayrollManagementSys.Service.Extensions
                 opt.RegisterValidatorsFromAssemblyContaining<DepartmanValidator>();
                 opt.RegisterValidatorsFromAssemblyContaining<EmployeeValidator>();
                 opt.RegisterValidatorsFromAssemblyContaining<EmployeeUpdateValidator>();
+                opt.RegisterValidatorsFromAssemblyContaining<Salary>();
                 opt.DisableDataAnnotationsValidation = true;
                 opt.ValidatorOptions.LanguageManager.Culture = new CultureInfo("tr");
             });

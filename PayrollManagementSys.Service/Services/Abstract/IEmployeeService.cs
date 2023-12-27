@@ -17,5 +17,6 @@ namespace PayrollManagementSys.Service.Services.Abstract
         Task<List<AppRole>> GetAllRolesAsync();
         Task EmployeeUpdateAsync(EmployeeUpdateDto employeeUpdateDto);
         Task EmployeeSafeDeleteAsync(int userId);
+        Task<int> GetLastEmployeeIdAsync();
     }
 }

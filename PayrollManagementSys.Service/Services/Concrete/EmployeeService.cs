@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using PayrollManagementSys.Data.UnitOfWorks;
 using PayrollManagementSys.Entity.DTOs.Departmans;
 using PayrollManagementSys.Entity.DTOs.Employees;
@@ -67,6 +68,10 @@ namespace PayrollManagementSys.Service.Services.Concrete
         {
             await unitOfWork.GetRepository<AppUser>().EmployeeSafeDeleteAsync(userId);
             await unitOfWork.SaveAsync();
+        }
+        public async Task<int> GetLastEmployeeIdAsync()
+        {
+            return await unitOfWork.GetRepository<AppUser>().GetLastEmployeeIdAsync();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model List<AppUser>
+﻿@model List<EmployeeDto>
 @{
     ViewData["Title"] = "EmployeSalary";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -43,7 +43,7 @@
                     <td>@item.Email</td>
                     <td>@item.Gender</td>
                     <td>@item.StartedDate</td>
-                    <td>@item.DepertmanId</td>
+                    <td>@item.Departman.Name</td>
                     <td>
                         <a class="btn btn-warning" data-id="@item.Id" asp-controller="Salary" asp-action="EditSalary" asp-route-employeeId="@item.Id">Düzenle</a>
                     </td>

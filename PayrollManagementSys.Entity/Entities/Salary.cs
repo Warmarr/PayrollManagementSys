@@ -16,10 +16,10 @@ namespace PayrollManagementSys.Entity.Entities
         public int PersonelId { get; set; }
         public AppUser Personel { get; set; }   
         public double SalaryCoefficient { get; set; }
-        public DateTime SalaryDate { get; set; }
+        public DateTime? SalaryDate { get; set; }
         public double TaxDeduction { get; set; }
         public double SgkDeduction { get; set; }
-        public double AdditionalPayments { get; set; }
+        public double? AdditionalPayments { get; set; }
         
        
     }

@@ -2,8 +2,11 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Framework;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using PayrollManagementSys.Data.UnitOfWorks;
 using PayrollManagementSys.Entity.DTOs.Employees;
+using PayrollManagementSys.Entity.DTOs.Salaries;
 using PayrollManagementSys.Entity.Entities;
 using PayrollManagementSys.Service.Services.Abstract;
 
@@ -14,18 +17,23 @@ namespace PayrollManagementSys.Web.Controllers
         private readonly IUnitOfWork unitOfWork;
         private readonly IEmployeeService employeService;
         private readonly IDepartmanService departmanService;
+        private readonly ISalaryService salaryService;
         private readonly IMapper mapper;
         private readonly IValidator<AppUser> validator;
         private readonly IValidator<EmployeeDto> validatorUpdate;
+        private readonly IValidator<Salary> salaryValidator;
 
-        public EmployeeController(IEmployeeService employeService,IDepartmanService departmanService,IMapper mapper,IValidator<AppUser> validator,IValidator<EmployeeDto> validatorUpdate)
+        public EmployeeController(IEmployeeService employeService,IDepartmanService departmanService,ISalaryService salaryService,
+            IMapper mapper,IValidator<AppUser> validator,IValidator<EmployeeDto> validatorUpdate,IValidator<Salary> salaryValidator)
         {
 
             this.employeService = employeService;
             this.departmanService = departmanService;
+            this.salaryService = salaryService;
             this.mapper = mapper;
             this.validator = validator;
             this.validatorUpdate = validatorUpdate;
+            this.salaryValidator = salaryValidator;
         }
         public async Task<IActionResult> Employees()
         {
@@ -52,7 +60,8 @@ namespace PayrollManagementSys.Web.Controllers
             if (result.IsValid)
             {
                 await employeService.CreateEmployeeAsync(employeeAddDto);
-                return RedirectToAction("Employees", "Employee");
+               
+                return RedirectToAction("EmployeeSalary", "Employee");
             }
             else
             {
@@ -103,6 +112,29 @@ namespace PayrollManagementSys.Web.Controllers
         {
             await employeService.EmployeeSafeDeleteAsync(userId);
             return RedirectToAction("Employees", "Employee");
+        }
+        [HttpGet]
+        public async Task<IActionResult> EmployeeSalary()
+        {
+            var Id = await employeService.GetLastEmployeeIdAsync();
+           
+            return View(new SalaryAddDto { PersonelId = Id});
+        }
+        [HttpPost]
+        public async Task<IActionResult> EmployeeSalary(SalaryAddDto salaryAddDto)
+        {
+            var Id = await employeService.GetLastEmployeeIdAsync();
+            var map = mapper.Map<Salary>(salaryAddDto);
+            var result = await salaryValidator.ValidateAsync(map);
+            if (result.IsValid)
+            {
+                await salaryService.SalaryAddAsync(salaryAddDto);
+                return RedirectToAction("Employees", "Employee");
+            }
+            else
+                result.AddToModelState(this.ModelState);
+            
+            return View(new SalaryAddDto { PersonelId = Id });
         }
     }
 }

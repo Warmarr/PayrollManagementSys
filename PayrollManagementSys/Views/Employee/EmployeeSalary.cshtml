@@ -1,0 +1,37 @@
+﻿@model SalaryAddDto
+@{
+    ViewData["Title"] = "EmployeeSalary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Çalışan Ücret Belirleme</h1>
+<div b-4cazk3bw56 class="card" style="padding:10px;">
+    <form asp-controller="Employee" asp-action="EmployeeSalary" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly"></div>
+
+        <input type="hidden" asp-for="PersonelId"/>
+        <div class="form-group">
+            <label asp-for="SalaryCoefficient" id="defaultFormControlInput" class="form-label">Maaş Katsayı</label>
+            <input asp-for="SalaryCoefficient" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Maaş Katsayı" aria-describedby="defaultFormControlHelp">
+            <span asp-validation-for="SalaryCoefficient" class="text-danger"></span>
+
+        </div>
+        <div class="form-group">
+            <label asp-for="TaxDeduction" id="defaultFormControlInput" class="form-label">Vergi Kesintisi</label>
+            <input asp-for="TaxDeduction" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Vergi Kesintisi" aria-describedby="defaultFormControlHelp">
+            <span asp-validation-for="TaxDeduction" class="text-danger"></span>
+
+        </div>
+        <div class="form-group">
+            <label asp-for="SgkDeduction" id="defaultFormControlInput" class="form-label">SGK Kesintisi</label>
+            <input asp-for="SgkDeduction" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="SGK Kesintisi" aria-describedby="defaultFormControlHelp">
+            <span asp-validation-for="SgkDeduction" class="text-danger"></span>
+
+        </div>
+
+        
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-primary"> Kaydet </button>
+        </div>
+    </form>
+</div>

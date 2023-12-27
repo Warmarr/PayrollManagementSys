@@ -21,7 +21,8 @@ namespace PayrollManagementSys.Data.Repositories.Abstract
         Task DepartmanUpdateAsync(string departmanName, int departmanId);
         Task DepartmanSafeDelete(int departmanId);
         Task EmployeeAddAsync(EmployeeAddDto employeeAddDto, string password);
-
+        Task EmployeeUpdateAsync(EmployeeUpdateDto employeeUpdateDto);
+        Task EmployeeSafeDeleteAsync(int userId);
 
 
     }

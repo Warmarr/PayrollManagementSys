@@ -74,6 +74,13 @@ namespace PayrollManagementSys.Web.Controllers
             }
             return View(departman);
         }
+        public async Task<IActionResult> DepartmanDelete(int departmanId)
+        {
+            await departmanService.DepartmanSafeDeleteAsync(departmanId);
+            return RedirectToAction("DepartmanPage","Deparman");
+        }
+
+
 
 
     }

@@ -1,10 +1,10 @@
-﻿@model EmployeeAddDto
+﻿@model EmployeeUpdateDto
 
 <h1>Kullanıcı Ekleme</h1>
 <div b-4cazk3bw56 class="card" style="padding:10px;">
-    <form asp-controller="Employee" asp-action="EmployeeAdd" method="post" enctype="multipart/form-data">
+    <form asp-controller="Employee" asp-action="EmployeeUpdate" method="post" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly"></div>
-
+        <input type="hidden" asp-for="Id"/>
         <div class="form-group">
             <label>Depertman</label>
             <select id="departmanList" class="form-control" asp-for="DepertmanId" asp-items="@(new SelectList(Model.Departmans,"Id","Name"))"></select>
@@ -28,12 +28,6 @@
             <label asp-for="Gender" id="defaultFormControlInput" class="form-label">Cinsiyet</label>
             <input asp-for="Gender" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Cinsiyeti" aria-describedby="defaultFormControlHelp">
             <span asp-validation-for="Gender" class="text-danger"></span>
-
-        </div>
-        <div class="form-group">
-            <label asp-for="BirtDate" id="defaultFormControlInput" class="form-label"> Doğum Tarihi</label>
-            <input asp-for="BirtDate" type="date" class="form-control mb-3" id="defaultFormControlInput" placeholder="Doğum Tarihi" aria-describedby="defaultFormControlHelp">
-            <span asp-validation-for="BirtDate" class="text-danger"></span>
 
         </div>
         <div class="form-group">
@@ -70,14 +64,10 @@
             <label>Rol</label>
             <select id="roleList" class="form-control" asp-for="RoleId" asp-items="@(new SelectList(Model.Roles,"Id","Name"))"></select>
         </div>
-        <div class="form-group" id="container">
-            <label asp-for="PasswordHash" id="defaultFormControlInput" class="form-label"> Şifre</label>
-            <input asp-for="PasswordHash" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Şifre" aria-describedby="defaultFormControlHelp">
-            <span asp-validation-for="PasswordHash" class="text-danger"></span>
-
-        </div>
+       
         <div class="form-group">
             <button type="submit" class="btn btn-outline-primary"> Kaydet </button>
         </div>
     </form>
 </div>
+

@@ -43,11 +43,11 @@
                     <td>@item.StartedDate</td>
                     <td>@item.Departman.Name</td>
                     <td>
-                        <a class="btn btn-warning">Düzenle</a>
+                        <a class="btn btn-warning" data-id="@item.Id" asp-controller="Employee" asp-action="EmployeeUpdate" asp-route-employeeId="@item.Id">Düzenle</a>
                         
                     </td>
                     <td>
-                        <a class="btn btn-danger">Sil</a>
+                        <a class="btn btn-danger" data-id="@item.Id" asp-controller="Employee" asp-action="EmployeeDelete" asp-route-userId="@item.Id">Sil</a>
                     </td>
                     
                 </tr>

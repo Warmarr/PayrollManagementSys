@@ -16,14 +16,16 @@ namespace PayrollManagementSys.Web.Controllers
         private readonly IDepartmanService departmanService;
         private readonly IMapper mapper;
         private readonly IValidator<AppUser> validator;
+        private readonly IValidator<EmployeeDto> validatorUpdate;
 
-        public EmployeeController(IEmployeeService employeService,IDepartmanService departmanService,IMapper mapper,IValidator<AppUser> validator)
+        public EmployeeController(IEmployeeService employeService,IDepartmanService departmanService,IMapper mapper,IValidator<AppUser> validator,IValidator<EmployeeDto> validatorUpdate)
         {
 
             this.employeService = employeService;
             this.departmanService = departmanService;
             this.mapper = mapper;
             this.validator = validator;
+            this.validatorUpdate = validatorUpdate;
         }
         public async Task<IActionResult> Employees()
         {
@@ -35,12 +37,16 @@ namespace PayrollManagementSys.Web.Controllers
         public async Task<IActionResult> EmployeeAdd()
         {
             var departmans = await departmanService.GetAllDepartmanAsync();
-            return View(new EmployeeAddDto { Departmans = departmans});
+            var roles = await employeService.GetAllRolesAsync();
+
+            return View(new EmployeeAddDto { Departmans = departmans,Roles = roles });
         }
         [HttpPost]
         public async Task<IActionResult> EmployeeAdd(EmployeeAddDto employeeAddDto)
         {
             var departmans = await departmanService.GetAllDepartmanAsync();
+            var roles = await employeService.GetAllRolesAsync();
+
             var map = mapper.Map<AppUser>(employeeAddDto);
             var result =  await validator.ValidateAsync(map);
             if (result.IsValid)
@@ -53,8 +59,50 @@ namespace PayrollManagementSys.Web.Controllers
                 result.AddToModelState(this.ModelState);
 
             }
-            return View(new EmployeeAddDto { Departmans=departmans});
+            return View(new EmployeeAddDto { Departmans=departmans,Roles = roles});
            
+        }
+        [HttpGet]
+        public async Task<IActionResult> EmployeeUpdate(int employeeId)
+        {
+            var employees = await employeService.GetEmployeeById(employeeId);
+
+            var departmans = await departmanService.GetAllDepartmanAsync();
+            
+            var roles = await employeService.GetAllRolesAsync();
+            var map = mapper.Map<EmployeeUpdateDto>(employees);
+            map.Roles = roles;
+            map.Departmans = departmans;
+            return View(map);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EmployeeUpdate(EmployeeUpdateDto employeeUpdateDto)
+        {
+            var employees = await employeService.GetEmployeeById(employeeUpdateDto.Id);
+
+            var departmans = await departmanService.GetAllDepartmanAsync();
+
+            var map = mapper.Map<EmployeeDto>(employeeUpdateDto);
+            var result = await validatorUpdate.ValidateAsync(map);
+            if (result.IsValid)
+            {
+                await employeService.EmployeeUpdateAsync(employeeUpdateDto);
+                return RedirectToAction("Employees", "Employee");
+            }
+            else
+                result.AddToModelState(this.ModelState);
+
+;
+            var roles = await employeService.GetAllRolesAsync();
+            var updatemap = mapper.Map<EmployeeUpdateDto>(employees);
+            updatemap.Roles = roles;
+            updatemap.Departmans = departmans;
+            return View(updatemap);
+        }
+        public async Task<IActionResult> EmployeeDelete(int userId)
+        {
+            await employeService.EmployeeSafeDeleteAsync(userId);
+            return RedirectToAction("Employees", "Employee");
         }
     }
 }

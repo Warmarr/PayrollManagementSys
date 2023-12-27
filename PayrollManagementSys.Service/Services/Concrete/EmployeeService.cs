@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using PayrollManagementSys.Data.UnitOfWorks;
+using PayrollManagementSys.Entity.DTOs.Departmans;
 using PayrollManagementSys.Entity.DTOs.Employees;
 using PayrollManagementSys.Entity.Entities;
 using PayrollManagementSys.Service.Services.Abstract;
@@ -45,6 +46,27 @@ namespace PayrollManagementSys.Service.Services.Concrete
             await unitOfWork.GetRepository<AppUser>().EmployeeAddAsync(employeeAddDto, hashedPassword);
 
 
+        }
+        public async Task<EmployeeDto> GetEmployeeById(int id)
+        {
+            var employee = await unitOfWork.GetRepository<AppUser>().GetAsync(x=>!x.IsDeleted && x.Id == id);
+            var map = mapper.Map<EmployeeDto>(employee);
+            return map;
+
+        }
+        public async Task<List<AppRole>> GetAllRolesAsync()
+        {
+            var roles = await unitOfWork.GetRepository<AppRole>().GetAllAsync();
+            return roles;
+        }
+        public async Task EmployeeUpdateAsync(EmployeeUpdateDto employeeUpdateDto)
+        {
+            await unitOfWork.GetRepository<AppUser>().EmployeeUpdateAsync(employeeUpdateDto);
+        }
+        public async Task EmployeeSafeDeleteAsync(int userId)
+        {
+            await unitOfWork.GetRepository<AppUser>().EmployeeSafeDeleteAsync(userId);
+            await unitOfWork.SaveAsync();
         }
     }
 }

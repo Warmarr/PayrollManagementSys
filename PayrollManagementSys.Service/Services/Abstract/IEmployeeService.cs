@@ -1,4 +1,5 @@
 ﻿using PayrollManagementSys.Entity.DTOs.Employees;
+using PayrollManagementSys.Entity.Entities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,5 +13,9 @@ namespace PayrollManagementSys.Service.Services.Abstract
     {
         Task<List<EmployeeDto>> GetAllEmployeeAsync();
         Task CreateEmployeeAsync(EmployeeAddDto employeeAddDto);
+        Task<EmployeeDto> GetEmployeeById(int id);
+        Task<List<AppRole>> GetAllRolesAsync();
+        Task EmployeeUpdateAsync(EmployeeUpdateDto employeeUpdateDto);
+        Task EmployeeSafeDeleteAsync(int userId);
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PayrollManagementSys.Service.Services.Concrete
 {
-    public class SalaryService: ISalaryService
+    public class SalaryService : ISalaryService
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -23,15 +23,28 @@ namespace PayrollManagementSys.Service.Services.Concrete
             await unitOfWork.GetRepository<Salary>().SalaryAddAsync(salaryAddDto);
             await unitOfWork.SaveAsync();
         }
-        public async Task InsertWorkDayAsync(WorkDay workDay)
+        public async Task<bool> InsertWorkDayAsync(WorkDaySalaryViewModel viewModel)
         {
-            await unitOfWork.GetRepository<WorkDay>().InsertWorkDayAsync(workDay);
+
+            int rowsAffected = await unitOfWork.GetRepository<WorkDay>().InsertWorkDayAsync(viewModel.WorkDay.PersonelId, viewModel.WorkDay.WorkDate, viewModel.WorkDay.WorkTime);
             await unitOfWork.SaveAsync();
+            if (rowsAffected > 0)
+            {
+                return true;
+            }
+            else
+
+                return false;
+
+
+
+
         }
+
         public async Task CalculateSalaryAsync()
         {
-            var allEmployeeIds = await unitOfWork.GetRepository<WorkDay>().GetAllAsync(x=>x.WorkDate != null);
-            foreach(var employeeId in allEmployeeIds)
+            var allEmployeeIds = await unitOfWork.GetRepository<WorkDay>().GetAllAsync(x => x.WorkDate != null);
+            foreach (var employeeId in allEmployeeIds)
             {
                 await unitOfWork.GetRepository<PaymentInfo>().CalculateSalary(employeeId.PersonelId);
             }
@@ -42,7 +55,7 @@ namespace PayrollManagementSys.Service.Services.Concrete
         {
             var dates = await unitOfWork.GetRepository<WorkDay>().GetAllAsync();
             return dates;
-            
+
         }
     }
 }

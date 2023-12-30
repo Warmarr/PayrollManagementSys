@@ -12,7 +12,9 @@
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 <h1 class="mb-4">Çalışanlar</h1>
-
+@{
+    string Color = "";
+}
 
 
 <a class="btn btn-primary mb-4" href="/Employee/EmployeeAdd">Çalışan Ekle</a>
@@ -27,35 +29,47 @@
                 <th>Cinsiyet</th>
                 <th>Başlangıç Tarihi</th>
                 <th>Departman</th>
-                <th>Çalışma Ayı</th>
+                <th>Durum</th>
+                <th>Düzenle</th>
                 <th>Sil</th>
-          
+
             </tr>
         </thead>
         <tbody>
-            
-                @foreach(var item in Model)
-                {<tr>
+
+            @foreach (var item in Model)
+            {
+                if (item.IsDeleted == false)
+                {
+                    Color = "badge badge-success";
+                }
+                else
+                {
+                    Color = "badge badge-danger";
+                }
+
+                <tr>
                     <td>@item.FirstName</td>
                     <td>@item.LastName</td>
                     <td>@item.Email</td>
                     <td>@item.Gender</td>
                     <td>@item.StartedDate</td>
                     <td>@item.Departman.Name</td>
-                    
+                    <td><span class="@Color">@(item.IsDeleted ? "Pasif" : "Aktif")</span></td>
+
                     <td>
-                        <a class="btn btn-warning" data-id="@item.Id" asp-controller="Employee" asp-action="EmployeeUpdate" asp-route-employeeId="@item.Id">Düzenle</a>
-                        
+                        <a style="color:white;" class="btn btn-warning" data-id="@item.Id" asp-controller="Employee" asp-action="EmployeeUpdate" asp-route-employeeId="@item.Id"><i class="fas fa-edit"></i>Düzenle</a>
+
                     </td>
                     <td>
-                        <a class="btn btn-danger" data-id="@item.Id" asp-controller="Employee" asp-action="EmployeeDelete" asp-route-userId="@item.Id">Sil</a>
+                        <a style="color:white;" class="btn btn-danger" data-id="@item.Id" asp-controller="Employee" asp-action="EmployeeDelete" asp-route-userId="@item.Id"><i class="fas fa-trash"></i>Sil</a>
                     </td>
-                    
+
                 </tr>
-                   
-                }
-                
-            
+
+            }
+
+
         </tbody>
 </div>
 @section Scripts{

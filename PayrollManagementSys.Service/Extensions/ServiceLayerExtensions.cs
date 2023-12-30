@@ -34,6 +34,7 @@ namespace PayrollManagementSys.Service.Extensions
                 opt.RegisterValidatorsFromAssemblyContaining<EmployeeValidator>();
                 opt.RegisterValidatorsFromAssemblyContaining<EmployeeUpdateValidator>();
                 opt.RegisterValidatorsFromAssemblyContaining<Salary>();
+                opt.RegisterValidatorsFromAssemblyContaining<AppRole>();
                 opt.DisableDataAnnotationsValidation = true;
                 opt.ValidatorOptions.LanguageManager.Culture = new CultureInfo("tr");
             });

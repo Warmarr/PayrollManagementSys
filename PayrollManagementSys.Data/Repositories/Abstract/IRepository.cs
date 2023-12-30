@@ -27,8 +27,9 @@ namespace PayrollManagementSys.Data.Repositories.Abstract
         Task EmployeeSafeDeleteAsync(int userId);
         Task<int> GetLastEmployeeIdAsync();
         Task SalaryAddAsync(SalaryAddDto salaryAddDto);
-        Task InsertWorkDayAsync(WorkDay workDay);
+        Task<int> InsertWorkDayAsync(int personelId, DateTime? workDate, double? workTime);
         Task CalculateSalary(int personelId);
+        Task InserRole(string roleName);
 
     }
 }

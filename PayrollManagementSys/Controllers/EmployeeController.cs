@@ -113,22 +113,16 @@ namespace PayrollManagementSys.Web.Controllers
             await employeService.EmployeeSafeDeleteAsync(userId);
             return RedirectToAction("Employees", "Employee");
         }
-        [HttpGet]
-        public async Task<IActionResult> EmployeeSalary()
-        {
-            var Id = await employeService.GetLastEmployeeIdAsync();
-           
-            return View(new SalaryAddDto { PersonelId = Id});
-        }
+
         [HttpPost]
-        public async Task<IActionResult> EmployeeSalary(SalaryAddDto salaryAddDto)
+        public async Task<IActionResult> EmployeeSalary(WorkDaySalaryViewModel viewModel)
         {
             var Id = await employeService.GetLastEmployeeIdAsync();
-            var map = mapper.Map<Salary>(salaryAddDto);
+            var map = mapper.Map<Salary>(viewModel);
             var result = await salaryValidator.ValidateAsync(map);
             if (result.IsValid)
             {
-                await salaryService.SalaryAddAsync(salaryAddDto);
+                await salaryService.SalaryAddAsync(viewModel.Salary);
                 return RedirectToAction("Employees", "Employee");
             }
             else

@@ -12,6 +12,7 @@ namespace PayrollManagementSys.Service.Services.Abstract
     public interface IEmployeeService
     {
         Task<List<EmployeeDto>> GetAllEmployeeAsync();
+        Task<List<EmployeeDto>> GetAllEmployeeWithNonDeleted();
         Task CreateEmployeeAsync(EmployeeAddDto employeeAddDto);
         Task<EmployeeDto> GetEmployeeById(int id);
         Task<List<AppRole>> GetAllRolesAsync();

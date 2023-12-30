@@ -173,19 +173,35 @@ namespace PayrollManagementSys.Data.Repositories.Concrete
                 new[] { personelIdParam, salaryCoeParam, taxDeductionParam, sgkDeductionParam });
 
         }
-        public async Task InsertWorkDayAsync(WorkDay workDay)
+        public async Task<int> InsertWorkDayAsync(int personelId, DateTime? workDate, double? workTime)
         {
-            var personelIdParam = new SqlParameter("@PersonelId", workDay.PersonelId);
-            var workTimeParam = new SqlParameter("@WorkTime",workDay.WorkTime);
-            var workDateParam = new SqlParameter("@WorkDate", workDay.WorkDate);
+            var personelIdParam = new SqlParameter("@PersonelId", personelId);
+            var workDateParam = new SqlParameter("@WorkDate", workDate);  
+            var workTimeParam = new SqlParameter("@WorkTime", workTime);
 
-            await dbContext.Database.ExecuteSqlRawAsync("EXECUTE InsertWorkDay @PersonelId,@WorkDate,@WorkTime",parameters: new[] { personelIdParam,workDateParam,workTimeParam });
+            var rowsAffectedParam = new SqlParameter("@RowsAffected", SqlDbType.Int)
+            {
+                Direction = ParameterDirection.Output
+            };
+
+            await dbContext.Database.ExecuteSqlRawAsync("EXECUTE InsertWorkDay @PersonelId, @WorkDate, @WorkTime,@RowsAffected OUTPUT", parameters: new[] { personelIdParam, workDateParam, workTimeParam,
+            rowsAffectedParam});
+
+            var rowsAffectedValue = (int)rowsAffectedParam.Value;
+
+            return rowsAffectedValue;
         }
+
         public async Task CalculateSalary(int personelId)
         {
             var personelIdParam = new SqlParameter("@PersonelId", personelId);
 
             await dbContext.Database.ExecuteSqlRawAsync("EXECUTE CalculateAndSaveSalary @PersonelId", parameters: new[] { personelIdParam });
+        }
+        public async Task InserRole(string roleName)
+        {
+            var roleParam = new SqlParameter("@RoleName", roleName);
+            await dbContext.Database.ExecuteSqlRawAsync("EXECUTE InsertRole @RoleName", parameters: new[] { roleName });
         }
     }
 }

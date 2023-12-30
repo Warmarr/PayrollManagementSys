@@ -5,6 +5,8 @@
     <form asp-controller="Employee" asp-action="EmployeeAdd" method="post" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly"></div>
 
+
+
         <div class="form-group">
             <label>Depertman</label>
             <select id="departmanList" class="form-control" asp-for="DepertmanId" asp-items="@(new SelectList(Model.Departmans,"Id","Name"))"></select>
@@ -66,6 +68,10 @@
             <span asp-validation-for="UserName" class="text-danger"></span>
 
         </div>
+        <a class="btn text-primary float-end" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+            Role Ekle
+            <i class="bx bx-plus"></i>
+        </a>
         <div class="form-group">
             <label>Rol</label>
             <select id="roleList" class="form-control" asp-for="RoleId" asp-items="@(new SelectList(Model.Roles,"Id","Name"))"></select>
@@ -81,3 +87,48 @@
         </div>
     </form>
 </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Rol Ekle</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="d-block form-label"> Rol Adı</label>
+                        <input style="border:1px solid black;" type="text" class="form-control" id="roleName" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                <button type="button" data-keyboard="false" id="btnSave" class="btn btn-primary">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+
+    <script src="¨~/js/roleAdd.js"></script>
+    <script>
+        var app = app || {};
+        app Urls = app.Urls || {};
+
+        app.Urls.baseUrl = '@Url.Content("~")';
+        app.Urls.roleAddUrl = '@(Url.Action("AddWithAjax", "Role"))'
+        app.Urls.employeeAddUrl = "@(Url.Action("EmployeeAdd", "Employee"))"
+    </script>
+        
+
+
+}

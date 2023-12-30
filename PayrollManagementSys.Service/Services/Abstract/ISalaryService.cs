@@ -11,7 +11,7 @@ namespace PayrollManagementSys.Service.Services.Abstract
     public interface ISalaryService
     {
         Task SalaryAddAsync(SalaryAddDto salaryAddDto);
-        Task InsertWorkDayAsync(WorkDay workDay);
+        Task<bool> InsertWorkDayAsync(WorkDaySalaryViewModel viewModel);
         Task CalculateSalaryAsync();
         Task<List<WorkDay>> GetWorkDateAsync();
     }

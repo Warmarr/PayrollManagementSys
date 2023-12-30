@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PayrollManagementSys.Entity.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,7 @@ namespace PayrollManagementSys.Entity.DTOs.Salaries
         public double SalaryCoefficient { get; set; }
         public double TaxDeduction { get; set; }
         public double SgkDeduction { get; set; }
+        public DateTime SalaryDate { get; set; }
+        public WorkDay workDay { get; set; }
     }
 }

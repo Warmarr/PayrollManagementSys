@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using PayrollManagementSys.Data.UnitOfWorks;
 using PayrollManagementSys.Entity.DTOs.Employees;
+using PayrollManagementSys.Entity.DTOs.Salaries;
 using PayrollManagementSys.Entity.Entities;
 using PayrollManagementSys.Service.Services.Abstract;
 
@@ -26,7 +27,7 @@ namespace PayrollManagementSys.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> EmployeSalary()
         {
-            var employees = await employeeService.GetAllEmployeeAsync();
+            var employees = await employeeService.GetAllEmployeeWithNonDeleted();
           
           
             return View(employees);
@@ -44,17 +45,42 @@ namespace PayrollManagementSys.Web.Controllers
         public async Task<IActionResult> SalaryEdit(int employeeId)
         {
             var employee = await employeeService.GetEmployeeById(employeeId);
-            var workDay = new WorkDay
+            var viewModel = new WorkDaySalaryViewModel
             {
-                PersonelId = employee.Id,
+                WorkDay = new WorkDay { PersonelId = employeeId},
+                
+                Salary = new SalaryAddDto { PersonelId= employeeId }
             };
-            return View(workDay);
+
+            return View(viewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> SalaryEdit(WorkDay workDay)
+        public async Task<IActionResult> SalaryEdit(WorkDaySalaryViewModel viewModel)
         {
-            await salaryService.InsertWorkDayAsync(workDay);
-            return RedirectToAction("EmployeeSalary", "Employee");
+
+            var viewModel1 = new WorkDaySalaryViewModel
+            {
+                WorkDay = new WorkDay { PersonelId = viewModel.WorkDay.PersonelId },
+
+                Salary = new SalaryAddDto { PersonelId = viewModel.WorkDay.PersonelId }
+            };
+
+
+            bool isSuccess = await salaryService.InsertWorkDayAsync(viewModel);
+
+
+            if (isSuccess)
+            {
+                // Return a success response or redirect to a success page
+                return RedirectToAction("Index", "Home"); // Adjust as needed
+            }
+            else
+            {
+                // Return an error response or handle the error in some way
+                TempData["Error"] = "AYNI AY VE YILDA ÇALIŞMA ZAMANI EKLENEMEZ!";
+                return View(viewModel1); // Adjust as needed
+            }
+            
                   
         }
   

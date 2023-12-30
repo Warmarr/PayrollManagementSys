@@ -20,7 +20,7 @@ namespace PayrollManagementSys.Data.UnitOfWorks
         public ValueTask DisposeAsync()
         {
             return dbContext.DisposeAsync();
-        }
+            }
 
         public IRepository<T> GetRepository<T>() where T : class, new()
         {

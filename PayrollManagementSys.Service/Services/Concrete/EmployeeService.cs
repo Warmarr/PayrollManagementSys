@@ -31,6 +31,14 @@ namespace PayrollManagementSys.Service.Services.Concrete
         }
         public async Task<List<EmployeeDto>> GetAllEmployeeAsync()
         {
+            var employees = await unitOfWork.GetRepository<AppUser>().GetAllAsync(null,x=>x.Departman);
+            var map = mapper.Map<List<EmployeeDto>>(employees);
+
+            return map;
+        }
+        public async Task<List<EmployeeDto>> GetAllEmployeeWithNonDeleted()
+        {
+
             var employees = await unitOfWork.GetRepository<AppUser>().GetAllAsync(x=>!x.IsDeleted,x=>x.Departman);
             var map = mapper.Map<List<EmployeeDto>>(employees);
 

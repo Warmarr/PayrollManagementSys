@@ -54,42 +54,9 @@
                 }
             </tbody>
         </table>
-        <div class="form-group">
-            <label>Maaş Ayı</label>
-            <select id="departmanList" class="form-control">
-                <option value="1">Ocak</option>
-                <option value="2">Şubat</option>
-                <option value="3">Mart</option>
-                <option value="4">Nisan</option>
-                <option value="5">Mayıs</option>
-                <option value="6">Haziran</option>
-                <option value="7">Temmuz</option>
-                <option value="8">Ağustos</option>
-                <option value="9">Eylül</option>
-                <option value="10">Ekim</option>
-                <option value="11">Kasım</option>
-                <option value="12">Aralık</option>
-            </select>
-        </div>
         <button type="submit" class="btn btn-outline-info">Maaş Hesapla</button>
     </form>
-    <script>
-        $(document).ready(function () {
-            // form submit edildiğinde
-            $('form').submit(function () {
-                // seçilen ay değerini al
-                var selectedMonth = $('#departmanList').val();
-
-                // gizli input alanına ekle
-                $('<input />').attr('type', 'hidden')
-                    .attr('name', 'selectedMonth')
-                    .attr('value', selectedMonth)
-                    .appendTo('form');
-
-                return true; // formun devam etmesine izin ver
-            });
-        });
-    </script>
+  
 </div>
 @section Scripts{
     <script src="~/js/employeeIndex.js" type="application/ecmascript"></script>

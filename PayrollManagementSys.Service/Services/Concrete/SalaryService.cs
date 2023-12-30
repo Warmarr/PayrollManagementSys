@@ -23,5 +23,26 @@ namespace PayrollManagementSys.Service.Services.Concrete
             await unitOfWork.GetRepository<Salary>().SalaryAddAsync(salaryAddDto);
             await unitOfWork.SaveAsync();
         }
+        public async Task InsertWorkDayAsync(WorkDay workDay)
+        {
+            await unitOfWork.GetRepository<WorkDay>().InsertWorkDayAsync(workDay);
+            await unitOfWork.SaveAsync();
+        }
+        public async Task CalculateSalaryAsync()
+        {
+            var allEmployeeIds = await unitOfWork.GetRepository<WorkDay>().GetAllAsync(x=>x.WorkDate != null);
+            foreach(var employeeId in allEmployeeIds)
+            {
+                await unitOfWork.GetRepository<PaymentInfo>().CalculateSalary(employeeId.PersonelId);
+            }
+            await unitOfWork.SaveAsync();
+
+        }
+        public async Task<List<WorkDay>> GetWorkDateAsync()
+        {
+            var dates = await unitOfWork.GetRepository<WorkDay>().GetAllAsync();
+            return dates;
+            
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace PayrollManagementSys.Entity.Entities
 
         public int PersonelId { get; set; }
         public AppUser Personel { get; set; }
-        public DateTime WorkDate { get; set; }
+        public DateTime? WorkDate { get; set; }
         public double WorkTime { get; set; }
     }
 }

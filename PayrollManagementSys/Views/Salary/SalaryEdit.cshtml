@@ -1,0 +1,31 @@
+﻿@model WorkDay
+@{
+    ViewData["Title"] = "SalaryEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Çalışma Günü Ekleme</h1>
+<div b-4cazk3bw56 class="card" style="padding:10px;">
+    <form asp-controller="Salary" asp-action="SalaryEdit" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly"></div>
+
+        <input type="hidden" asp-for="PersonelId" />
+        <div class="form-group">
+            <label asp-for="WorkDate" id="defaultFormControlInput" class="form-label">Tarih</label>
+            <input asp-for="WorkDate" type="date" class="form-control mb-3" id="defaultFormControlInput" placeholder="Tarih" aria-describedby="defaultFormControlHelp">
+            @*<span asp-validation-for="WorkDate" class="text-danger"></span>
+*@
+        </div>
+        <div class="form-group">
+            <label asp-for="WorkTime" id="defaultFormControlInput" class="form-label">Çalışma Zaman</label>
+            <input asp-for="WorkTime" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Çalışma Zaman" aria-describedby="defaultFormControlHelp">
+         @*   <span asp-validation-for="WorkTime" class="text-danger"></span>*@
+
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-primary"> Kaydet </button>
+        </div>
+    </form>
+</div>
+

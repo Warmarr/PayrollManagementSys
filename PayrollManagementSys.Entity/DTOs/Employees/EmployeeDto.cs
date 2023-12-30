@@ -21,6 +21,8 @@ namespace PayrollManagementSys.Entity.DTOs.Employees
         public string UserName { get; set; }
         public DateTime StartedDate { get; set; }
         public DateTime BirtDate { get; set; }
+        public WorkDay WorkDay { get; set; }
+        public Salary Salary { get; set; }
 
         public DepartmanDto Departman { get; set; }
 

@@ -173,5 +173,19 @@ namespace PayrollManagementSys.Data.Repositories.Concrete
                 new[] { personelIdParam, salaryCoeParam, taxDeductionParam, sgkDeductionParam });
 
         }
+        public async Task InsertWorkDayAsync(WorkDay workDay)
+        {
+            var personelIdParam = new SqlParameter("@PersonelId", workDay.PersonelId);
+            var workTimeParam = new SqlParameter("@WorkTime",workDay.WorkTime);
+            var workDateParam = new SqlParameter("@WorkDate", workDay.WorkDate);
+
+            await dbContext.Database.ExecuteSqlRawAsync("EXECUTE InsertWorkDay @PersonelId,@WorkDate,@WorkTime",parameters: new[] { personelIdParam,workDateParam,workTimeParam });
+        }
+        public async Task CalculateSalary(int personelId)
+        {
+            var personelIdParam = new SqlParameter("@PersonelId", personelId);
+
+            await dbContext.Database.ExecuteSqlRawAsync("EXECUTE CalculateAndSaveSalary @PersonelId", parameters: new[] { personelIdParam });
+        }
     }
 }

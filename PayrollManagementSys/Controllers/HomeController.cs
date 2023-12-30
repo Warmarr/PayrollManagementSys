@@ -21,7 +21,7 @@ namespace PayrollManagementSys.Controllers
         {
             var kisiler = await unitOfWork.GetRepository<AppUser>().GetAllAsync();
             return View(kisiler);
-        }
+            }
 
         public IActionResult Privacy()
         {

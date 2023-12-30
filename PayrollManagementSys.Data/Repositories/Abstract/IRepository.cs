@@ -1,5 +1,6 @@
 ﻿using PayrollManagementSys.Entity.DTOs.Employees;
 using PayrollManagementSys.Entity.DTOs.Salaries;
+using PayrollManagementSys.Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace PayrollManagementSys.Data.Repositories.Abstract
         Task EmployeeSafeDeleteAsync(int userId);
         Task<int> GetLastEmployeeIdAsync();
         Task SalaryAddAsync(SalaryAddDto salaryAddDto);
+        Task InsertWorkDayAsync(WorkDay workDay);
+        Task CalculateSalary(int personelId);
 
     }
 }

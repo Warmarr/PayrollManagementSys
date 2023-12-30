@@ -61,7 +61,7 @@ namespace PayrollManagementSys.Web.Controllers
             {
                 await employeService.CreateEmployeeAsync(employeeAddDto);
                
-                return RedirectToAction("EmployeeSalary", "Employee");
+                return RedirectToAction("Employees", "Employee");
             }
             else
             {

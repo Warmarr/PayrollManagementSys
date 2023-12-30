@@ -23,7 +23,7 @@
 
 <a class="btn btn-primary mb-4" href="/Deparman/DepartmanAdd">Departman Ekle</a>
 
-<div b-4cazk3bw56 class="card">
+<div b-4cazk3bw56 class="card" style="padding:5px;">
     <table id="employeesTable" class="table table-striped" style="width:100%">
         <thead>
             <tr>
@@ -34,10 +34,8 @@
             </tr>
         </thead>
         <tbody>
-
             @foreach (var item in Model)
             {
-
                 if (item.IsDeleted == false)
                 {
                     color = "limegreen";
@@ -52,18 +50,16 @@
 
                     <td>
                         <a class="btn btn-warning" data-id="@item.Id" asp-controller="Deparman" asp-action="DepartmanUpdate" asp-route-departmanId="@item.Id">Düzenle</a>
-
                     </td>
                     <td>
                         <a class="btn btn-danger" data-id="@item.Id" asp-controller="Deparman" asp-action="DepartmanDelete" asp-route-departmanId="@item.Id">Sil</a>
                     </td>
-
                 </tr>
-
             }
         </tbody>
-        </script>
+    </table>
 </div>
+
 @section Scripts{
     <script src="~/js/employeeIndex.js" type="application/ecmascript"></script>
 }

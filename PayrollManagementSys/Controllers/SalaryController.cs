@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using PayrollManagementSys.Data.UnitOfWorks;
+using PayrollManagementSys.Entity.DTOs.Employees;
+using PayrollManagementSys.Entity.Entities;
 using PayrollManagementSys.Service.Services.Abstract;
 
 namespace PayrollManagementSys.Web.Controllers
@@ -8,20 +13,50 @@ namespace PayrollManagementSys.Web.Controllers
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IEmployeeService employeeService;
+        private readonly ISalaryService salaryService;
+        private readonly IMapper mapper;
 
-        public SalaryController(IUnitOfWork unitOfWork,IEmployeeService employeeService )
+        public SalaryController(IUnitOfWork unitOfWork,IEmployeeService employeeService,ISalaryService salaryService,IMapper mapper )
         {
             this.unitOfWork = unitOfWork;
             this.employeeService = employeeService;
+            this.salaryService = salaryService;
+            this.mapper = mapper;
         }
+        [HttpGet]
         public async Task<IActionResult> EmployeSalary()
         {
-            var employees = await employeeService.GetAllEmployeeAsync(); 
+            var employees = await employeeService.GetAllEmployeeAsync();
+          
+          
             return View(employees);
         }
-        public async Task<IActionResult> EmployeeWork()
+        [HttpPost]
+        public async Task<IActionResult> EmployeSalaryPost(int selectedMonth)
         {
-            return View();
+
+            await salaryService.CalculateSalaryAsync();
+            var id = selectedMonth;
+            return RedirectToAction("EmployeSalary", "Salary");
+
         }
+        [HttpGet]
+        public async Task<IActionResult> SalaryEdit(int employeeId)
+        {
+            var employee = await employeeService.GetEmployeeById(employeeId);
+            var workDay = new WorkDay
+            {
+                PersonelId = employee.Id,
+            };
+            return View(workDay);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SalaryEdit(WorkDay workDay)
+        {
+            await salaryService.InsertWorkDayAsync(workDay);
+            return RedirectToAction("EmployeeSalary", "Employee");
+                  
+        }
+  
     }
 }

@@ -17,6 +17,10 @@ namespace PayrollManagementSys.Entity.Entities
         public AppUser Personel { get; set; }
         public DateTime PaymentDate { get; set; }
         public double PaymentAmount { get; set; }
+        public float? SalaryCoefficient { get; set; }
+        public float? TaxDeduction { get; set; }
+        public float? SgkDeduction { get; set; }
+        public float? AdditionalPayments { get; set; }
         public string PaymentDescription { get; set; }
 
     }

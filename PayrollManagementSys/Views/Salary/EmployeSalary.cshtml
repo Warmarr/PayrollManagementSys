@@ -17,45 +17,79 @@
 
 
 
-<a class="btn btn-primary mb-4" href="/Deparman/DepartmanAdd">Kullanıcıları Getir</a>
 
 <div b-4cazk3bw56 class="card">
-    <table id="employeesTable" class="table table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <th>Ad</th>
-                <th>Soyad</th>
-                <th>E-Mail</th>
-                <th>Cinsiyet</th>
-                <th>Başlangıç Tarihi</th>
-                <th>Departman</th>
-                <th>Maaş İşlem</th>
-
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var item in Model)
-            {
+    <form asp-action="EmployeSalaryPost" method="post">
+        <table id="employeesTable" class="table table-striped" style="width:100%">
+            <thead>
                 <tr>
-                    <td>@item.FirstName</td>
-                    <td>@item.LastName</td>
-                    <td>@item.Email</td>
-                    <td>@item.Gender</td>
-                    <td>@item.StartedDate</td>
-                    <td>@item.Departman.Name</td>
-                    <td>
-                        <a class="btn btn-warning" data-id="@item.Id" asp-controller="Salary" asp-action="EditSalary" asp-route-employeeId="@item.Id">Düzenle</a>
-                    </td>
-                   
+                    <th>Ad</th>
+                    <th>Soyad</th>
+                    <th>E-Mail</th>
+                    <th>Cinsiyet</th>
+                    <th>Başlangıç Tarihi</th>
+                    <th>Departman</th>
+                    <th>Maaş İşlem</th>
 
                 </tr>
+            </thead>
+            <tbody>
 
-            }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FirstName</td>
+                        <td>@item.LastName</td>
+                        <td>@item.Email</td>
+                        <td>@item.Gender</td>
+                        <td>@item.StartedDate</td>
+                        <td>@item.Departman.Name</td>
+
+                        <td>
+                            <a class="btn btn-warning" data-id="@item.Id" asp-controller="Salary" asp-action="SalaryEdit" asp-route-employeeId="@item.Id">Maaş İşlemleri</a>
+                        </td>
 
 
-        </tbody>
-</script>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="form-group">
+            <label>Maaş Ayı</label>
+            <select id="departmanList" class="form-control">
+                <option value="1">Ocak</option>
+                <option value="2">Şubat</option>
+                <option value="3">Mart</option>
+                <option value="4">Nisan</option>
+                <option value="5">Mayıs</option>
+                <option value="6">Haziran</option>
+                <option value="7">Temmuz</option>
+                <option value="8">Ağustos</option>
+                <option value="9">Eylül</option>
+                <option value="10">Ekim</option>
+                <option value="11">Kasım</option>
+                <option value="12">Aralık</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-outline-info">Maaş Hesapla</button>
+    </form>
+    <script>
+        $(document).ready(function () {
+            // form submit edildiğinde
+            $('form').submit(function () {
+                // seçilen ay değerini al
+                var selectedMonth = $('#departmanList').val();
+
+                // gizli input alanına ekle
+                $('<input />').attr('type', 'hidden')
+                    .attr('name', 'selectedMonth')
+                    .attr('value', selectedMonth)
+                    .appendTo('form');
+
+                return true; // formun devam etmesine izin ver
+            });
+        });
+    </script>
 </div>
 @section Scripts{
     <script src="~/js/employeeIndex.js" type="application/ecmascript"></script>

@@ -1,6 +1,7 @@
 ﻿@model List<EmployeeDto>
+
 @{
-    ViewData["Title"] = "EmployeSalary";
+    ViewData["Title"] = "PayrollEmployee";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,11 +16,7 @@
 <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
 
-
-
-
-
-<form asp-action="EmployeSalaryPost" method="post">
+<form asp-action="PayrollEmployee" method="post">
     <div b-4cazk3bw56 class="card" style="padding:5px;">
         <table id="employeesTable" class="table table-striped" style="width:100%">
             <thead>
@@ -30,7 +27,7 @@
                     <th>Cinsiyet</th>
                     <th>Başlangıç Tarihi</th>
                     <th>Departman</th>
-                    <th>Maaş İşlem</th>
+                    <th>Bordo Al</th>
 
                 </tr>
             </thead>
@@ -47,7 +44,7 @@
                         <td>@item.Departman.Name</td>
 
                         <td>
-                            <a style="color:white;" class="btn btn-warning" data-id="@item.Id" asp-controller="Salary" asp-action="SalaryEdit" asp-route-employeeId="@item.Id"><i class="fa-solid fa-dollar-sign"></i>Maaş İşlemleri</a>
+                            <a style="color:white;" class="btn btn-warning" data-id="@item.Id" asp-controller="Payroll" asp-action="GetPayroll" asp-route-employeeId="@item.Id"><i class="fa-solid fa-dollar-sign"></i>Bordro Al</a>
                         </td>
 
 

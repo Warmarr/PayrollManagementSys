@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using PayrollManagementSys.Entity.Entities;
 using PayrollManagementSys.Service.FluentValidation;
+using PayrollManagementSys.Service.Helpers;
 using PayrollManagementSys.Service.Services.Abstract;
 using PayrollManagementSys.Service.Services.Concrete;
 using System;
@@ -23,6 +24,11 @@ namespace PayrollManagementSys.Service.Extensions
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IDepartmanService, DepartmanService>();
             services.AddScoped<ISalaryService, SalaryService>();
+            services.AddScoped<IPayrollService, PayrollService>();
+
+            services.AddScoped<IPdfHelper, PdfHelper>();
+
+
 
 
             services.AddAutoMapper(assembly);

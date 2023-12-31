@@ -1,0 +1,36 @@
+﻿@model SalaryAddDto
+@{
+    ViewData["Title"] = "GetPayroll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div b-4cazk3bw56 class="card" style="padding:10px;">
+    <form asp-controller="Payroll" asp-action="GetPayroll" method="post" enctype="multipart/form-data">
+       <input type="hidden" asp-for="PersonelId"/>
+        
+        <div class="form-group">
+
+            <label asp-for="User.FirstName">Ad</label>
+            <input asp-for="User.FirstName" type="text" disabled />
+
+        </div>
+        <div class="form-group">
+
+            <label asp-for="User.LastName">Soyad</label>
+            <input asp-for="User.LastName" type="text" disabled  />
+
+
+        </div>
+        <div class="form-group">
+
+            <label asp-for="SalaryDate">Tarih (Ay ve Yıl)</label>
+            <input asp-for="SalaryDate" value="@DateTime.Now.ToString("Y")" type="month" id="daymonth"/>
+
+        </div>  
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-primary">Bordo Al</button>
+        </div>
+    </form>
+    
+</div>
+

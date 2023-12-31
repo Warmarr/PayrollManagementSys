@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using PayrollManagementSys.Data.UnitOfWorks;
@@ -67,12 +68,22 @@ namespace PayrollManagementSys.Web.Controllers
 
 
             bool isSuccess = await salaryService.InsertWorkDayAsync(viewModel);
+            bool isSuccessSalary = await salaryService.SalaryAddAsync(viewModel.Salary);
 
 
             if (isSuccess)
             {
-                // Return a success response or redirect to a success page
-                return RedirectToAction("Index", "Home"); // Adjust as needed
+                
+                if (isSuccessSalary)
+                {
+                    return RedirectToAction("Index", "Home"); // Adjust as needed
+
+                }
+                else 
+                {
+                    TempData["ErrorSalary"] = "MAAŞ BİLGİ İŞLEMLERİ SIRASINDA HATA OLUŞTU!";
+                    return View(viewModel1); // Adjust as needed
+                }
             }
             else
             {
@@ -80,8 +91,8 @@ namespace PayrollManagementSys.Web.Controllers
                 TempData["Error"] = "AYNI AY VE YILDA ÇALIŞMA ZAMANI EKLENEMEZ!";
                 return View(viewModel1); // Adjust as needed
             }
-            
-                  
+
+
         }
   
     }

@@ -10,7 +10,7 @@
 
         <div asp-validation-summary="ModelOnly"></div>
 
-        <input type="hidden" asp-for="WorkDay.PersonelId" />
+        <input type="text" asp-for="WorkDay.PersonelId" />
         <div class="form-group">
             <label asp-for="WorkDay.WorkDate" id="defaultFormControlInput" class="form-label">Tarih</label>
             <input asp-for="WorkDay.WorkDate" type="date" class="form-control mb-3" id="defaultFormControlInput" placeholder="Tarih" aria-describedby="defaultFormControlHelp">
@@ -54,6 +54,11 @@
             <label asp-for="Salary.SgkDeduction" id="defaultFormControlInput" class="form-label">SGK Kesintisi</label>
             <input asp-for="Salary.SgkDeduction" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="SGK Kesintisi" aria-describedby="defaultFormControlHelp">
             <span asp-validation-for="Salary.SgkDeduction" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Salary.AdditionalPayments" id="defaultFormControlInput" class="form-label">Ek Ödemeler</label>
+            <input asp-for="Salary.AdditionalPayments" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="SGK Kesintisi" aria-describedby="defaultFormControlHelp">
+            <span asp-validation-for="Salary.AdditionalPayments" class="text-danger"></span>
 
         </div>
 
@@ -77,6 +82,20 @@
                 Swal.fire({
                     title: 'Hata!',
                     text: errorMessage,
+                    icon: 'error',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
+
+        $(document).ready(function () {
+            // Check for success message in TempData and show SweetAlert
+            var errorMessageSalary = '@TempData["ErrorSalary"]';
+            if (errorMessageSalary) {
+                Swal.fire({
+                    title: 'Hata!',
+                    text: errorMessageSalary,
                     icon: 'error',
                     confirmButtonColor: '#3085d6',
                     confirmButtonText: 'OK'

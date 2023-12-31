@@ -18,10 +18,16 @@ namespace PayrollManagementSys.Service.Services.Concrete
         {
             this.unitOfWork = unitOfWork;
         }
-        public async Task SalaryAddAsync(SalaryAddDto salaryAddDto)
+        public async Task<bool> SalaryAddAsync(SalaryAddDto salaryAddDto)
         {
-            await unitOfWork.GetRepository<Salary>().SalaryAddAsync(salaryAddDto);
+            int rowsAffected = await unitOfWork.GetRepository<Salary>().SalaryAddAsync(salaryAddDto);
             await unitOfWork.SaveAsync();
+            if (rowsAffected > 0)
+            {
+                return true;
+            }
+            else
+                return false;
         }
         public async Task<bool> InsertWorkDayAsync(WorkDaySalaryViewModel viewModel)
         {
@@ -36,11 +42,7 @@ namespace PayrollManagementSys.Service.Services.Concrete
 
                 return false;
 
-
-
-
         }
-
         public async Task CalculateSalaryAsync()
         {
             var allEmployeeIds = await unitOfWork.GetRepository<WorkDay>().GetAllAsync(x => x.WorkDate != null);
@@ -57,5 +59,11 @@ namespace PayrollManagementSys.Service.Services.Concrete
             return dates;
 
         }
+        public async Task<PaymentInfo> GetPaymentInfo(int personelId,int istenilenAy,int istenilenYıl)
+        {
+            var paymentInfo = await unitOfWork.GetRepository<PaymentInfo>().GetPayrollAsync(personelId,istenilenAy,istenilenYıl);
+            return paymentInfo;
+        }
+        
     }
 }

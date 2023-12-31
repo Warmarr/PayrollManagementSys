@@ -29,6 +29,13 @@ namespace PayrollManagementSys.Data.Context
         public DbSet<Salary> Salaries { get; set; }
         public DbSet<WorkDay> WorkDays { get; set; }
 
+
+        [DbFunction("dbo", "GetMonthlyPayrollForEmployee")]
+        public static IQueryable<PaymentInfo> GetMonthlyPayrollForEmployee(int personelId, int istenilenAy, int istenilenYil)
+        {
+            throw new NotSupportedException("Direct calls are not supported.");
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

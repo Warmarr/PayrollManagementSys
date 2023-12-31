@@ -10,9 +10,10 @@ namespace PayrollManagementSys.Service.Services.Abstract
 {
     public interface ISalaryService
     {
-        Task SalaryAddAsync(SalaryAddDto salaryAddDto);
+        Task<bool> SalaryAddAsync(SalaryAddDto salaryAddDto);
         Task<bool> InsertWorkDayAsync(WorkDaySalaryViewModel viewModel);
         Task CalculateSalaryAsync();
         Task<List<WorkDay>> GetWorkDateAsync();
+        Task<PaymentInfo> GetPaymentInfo(int personelId, int istenilenAy, int istenilenYıl);
     }
 }

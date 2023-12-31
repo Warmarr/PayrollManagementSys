@@ -162,15 +162,26 @@ namespace PayrollManagementSys.Data.Repositories.Concrete
             return result;
 
         }
-        public async Task SalaryAddAsync(SalaryAddDto salaryAddDto)
+        public async Task<int> SalaryAddAsync(SalaryAddDto salaryAddDto)
         {
             var personelIdParam = new SqlParameter("@PersonelId", salaryAddDto.PersonelId);
             var salaryCoeParam = new SqlParameter("@SalaryCoefficient", salaryAddDto.SalaryCoefficient);
             var taxDeductionParam = new SqlParameter("@TaxDeduction", salaryAddDto.TaxDeduction);
             var sgkDeductionParam = new SqlParameter("@SgkDeduction", salaryAddDto.SgkDeduction);
+            var salaryDateParam = new SqlParameter("@SalaryDate", salaryAddDto.SalaryDate);
+            var additionalPayment = new SqlParameter("@AdditionalPayments", salaryAddDto.AdditionalPayments);
 
-            await dbContext.Database.ExecuteSqlRawAsync("EXECUTE InsertSalary @PersonelId,@SalaryCoefficient,@TaxDeduction,@SgkDeduction", parameters:
-                new[] { personelIdParam, salaryCoeParam, taxDeductionParam, sgkDeductionParam });
+            var rowsAffectedParam = new SqlParameter("@RowsAffected", SqlDbType.Int)
+            {
+                Direction = ParameterDirection.Output
+            };
+
+            await dbContext.Database.ExecuteSqlRawAsync("EXECUTE InsertSalary @PersonelId,@SalaryCoefficient,@TaxDeduction,@SgkDeduction,@SalaryDate,@AdditionalPayments,@RowsAffected OUTPUT", parameters:
+                new[] { personelIdParam, salaryCoeParam, taxDeductionParam, sgkDeductionParam, salaryDateParam,additionalPayment,rowsAffectedParam });
+
+            var rowsAffectedValue = (int)rowsAffectedParam.Value;
+            return rowsAffectedValue;
+
 
         }
         public async Task<int> InsertWorkDayAsync(int personelId, DateTime? workDate, double? workTime)
@@ -203,5 +214,14 @@ namespace PayrollManagementSys.Data.Repositories.Concrete
             var roleParam = new SqlParameter("@RoleName", roleName);
             await dbContext.Database.ExecuteSqlRawAsync("EXECUTE InsertRole @RoleName", parameters: new[] { roleName });
         }
+        public async Task<PaymentInfo> GetPayrollAsync(int personelId,int istenilenAy,int istenilenYıl)
+        {
+            var result = await dbContext.PaymentInfos
+                            .FromSqlRaw("SELECT * FROM dbo.GetMonthlyPayrollForEmployee({0},{1},{2})", personelId, istenilenAy, istenilenYıl)
+                            .FirstOrDefaultAsync();
+
+            return result;
+        }
+
     }
 }

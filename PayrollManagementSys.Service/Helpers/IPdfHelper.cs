@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PayrollManagementSys.Entity.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace PayrollManagementSys.Service.Helpers
 {
     public interface IPdfHelper
     {
-        Task<MemoryStream> GeneratePdf(double salary);
+        byte[] GenerateInvoice(PaymentInfo paymentInfo);
     }
 }

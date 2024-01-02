@@ -10,7 +10,7 @@ namespace PayrollManagementSys.Service.Services.Abstract
     public interface IPayrollService
     {
         Task<PaymentInfo> GetPaymentInfo(int personelId, int istenilenAy, int istenilenYıl);
-        Task<MemoryStream> CreatePayrollAsync(double payment);
+        //Task<MemoryStream> CreatePayrollAsync(double payment);
         
     }
 }

@@ -31,6 +31,9 @@ namespace PayrollManagementSys.Data.Repositories.Abstract
         Task CalculateSalary(int personelId);
         Task InserRole(string roleName);
         Task<PaymentInfo> GetPayrollAsync(int personelId, int istenilenAy, int istenilenYıl);
+        Task<List<AverageSalaryByDepartment>> GetAverageSalaryByDepartmentAsync();
+        Task<int> GetTotalEmployeeAsync();
+        Task<int> GetTotalDepartmanAsync();
 
     }
 }

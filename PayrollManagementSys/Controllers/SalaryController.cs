@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ namespace PayrollManagementSys.Web.Controllers
             this.salaryService = salaryService;
             this.mapper = mapper;
         }
+        [Authorize(Roles = "Superadmin,Admin")]
         [HttpGet]
         public async Task<IActionResult> EmployeSalary()
         {
@@ -33,6 +35,8 @@ namespace PayrollManagementSys.Web.Controllers
           
             return View(employees);
         }
+
+        [Authorize(Roles = "Superadmin,Admin")]
         [HttpPost]
         public async Task<IActionResult> EmployeSalaryPost(int selectedMonth)
         {
@@ -42,6 +46,8 @@ namespace PayrollManagementSys.Web.Controllers
             return RedirectToAction("EmployeSalary", "Salary");
 
         }
+
+        [Authorize(Roles = "Superadmin,Admin")]
         [HttpGet]
         public async Task<IActionResult> SalaryEdit(int employeeId)
         {
@@ -55,6 +61,8 @@ namespace PayrollManagementSys.Web.Controllers
 
             return View(viewModel);
         }
+
+        [Authorize(Roles = "Superadmin,Admin")]
         [HttpPost]
         public async Task<IActionResult> SalaryEdit(WorkDaySalaryViewModel viewModel)
         {
@@ -81,14 +89,14 @@ namespace PayrollManagementSys.Web.Controllers
                 }
                 else 
                 {
-                    TempData["ErrorSalary"] = "MAAŞ BİLGİ İŞLEMLERİ SIRASINDA HATA OLUŞTU!";
+                    TempData["ErrorSalary"] = "MAAS BILGI ISLEMLERI SIRASINDA HATA OLUSTU!";
                     return View(viewModel1); // Adjust as needed
                 }
             }
             else
             {
                 // Return an error response or handle the error in some way
-                TempData["Error"] = "AYNI AY VE YILDA ÇALIŞMA ZAMANI EKLENEMEZ!";
+                TempData["Error"] = "AYNI AY VE YILDA ÇALISMA ZAMANI EKLENEMEZ!";
                 return View(viewModel1); // Adjust as needed
             }
 

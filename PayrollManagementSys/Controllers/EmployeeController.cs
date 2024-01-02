@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Framework;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -35,12 +36,15 @@ namespace PayrollManagementSys.Web.Controllers
             this.validatorUpdate = validatorUpdate;
             this.salaryValidator = salaryValidator;
         }
+        [Authorize(Roles = "Superadmin, Admin")]
         public async Task<IActionResult> Employees()
         {
             var employees = await employeService.GetAllEmployeeAsync();
             
             return View(employees);
         }
+
+        [Authorize(Roles = "Superadmin, Admin")]
         [HttpGet]
         public async Task<IActionResult> EmployeeAdd()
         {
@@ -49,6 +53,8 @@ namespace PayrollManagementSys.Web.Controllers
 
             return View(new EmployeeAddDto { Departmans = departmans,Roles = roles });
         }
+
+        [Authorize(Roles ="Superadmin, Admin")]
         [HttpPost]
         public async Task<IActionResult> EmployeeAdd(EmployeeAddDto employeeAddDto)
         {
@@ -71,6 +77,8 @@ namespace PayrollManagementSys.Web.Controllers
             return View(new EmployeeAddDto { Departmans=departmans,Roles = roles});
            
         }
+
+        [Authorize(Roles = "Superadmin, Admin")]
         [HttpGet]
         public async Task<IActionResult> EmployeeUpdate(int employeeId)
         {
@@ -84,6 +92,8 @@ namespace PayrollManagementSys.Web.Controllers
             map.Departmans = departmans;
             return View(map);
         }
+
+        [Authorize(Roles = "Superadmin, Admin")]
         [HttpPost]
         public async Task<IActionResult> EmployeeUpdate(EmployeeUpdateDto employeeUpdateDto)
         {
@@ -114,6 +124,7 @@ namespace PayrollManagementSys.Web.Controllers
             return RedirectToAction("Employees", "Employee");
         }
 
+        [Authorize(Roles = "Superadmin, Admin")]
         [HttpPost]
         public async Task<IActionResult> EmployeeSalary(WorkDaySalaryViewModel viewModel)
         {

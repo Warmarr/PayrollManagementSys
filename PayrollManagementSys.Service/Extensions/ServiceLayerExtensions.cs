@@ -25,6 +25,7 @@ namespace PayrollManagementSys.Service.Extensions
             services.AddScoped<IDepartmanService, DepartmanService>();
             services.AddScoped<ISalaryService, SalaryService>();
             services.AddScoped<IPayrollService, PayrollService>();
+            services.AddScoped<IDashboardService,DashboardService>();
 
             services.AddScoped<IPdfHelper, PdfHelper>();
 

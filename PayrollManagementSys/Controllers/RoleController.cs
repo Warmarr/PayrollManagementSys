@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PayrollManagementSys.Entity.Entities;
 using PayrollManagementSys.Service.Services.Abstract;
@@ -15,6 +16,7 @@ namespace PayrollManagementSys.Web.Controllers
             this.validator = validator;
             this.roleService = roleService;
         }
+        [Authorize(Roles = "Superadmin,Admin")]
         [HttpPost]
         public async  Task<IActionResult> AddWithAjax([FromBody] AppRole role)
         {

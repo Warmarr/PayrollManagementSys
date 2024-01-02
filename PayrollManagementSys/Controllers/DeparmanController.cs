@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PayrollManagementSys.Data.UnitOfWorks;
 using PayrollManagementSys.Entity.DTOs.Departmans;
@@ -21,17 +22,20 @@ namespace PayrollManagementSys.Web.Controllers
             this.validator = validator;
             this.mapper = mapper;
         }
+        [Authorize(Roles ="Superadmin, Admin")]
         public async Task<IActionResult> DepartmanPage()
         {
             var departmans = await departmanService.GetAllDepartmanAsync();
             return View(departmans);
         }
+        [Authorize(Roles = "Superadmin, Admin")]
+
         [HttpGet]
         public async Task<IActionResult> DepartmanAdd()
         {
             return View();
         }
-
+        [Authorize(Roles = "Superadmin, Admin")]
 
         [HttpPost]
         public async Task<IActionResult> DepartmanAdd(DepartmanDto departmanDto)
@@ -51,12 +55,15 @@ namespace PayrollManagementSys.Web.Controllers
 
         }
 
+        [Authorize(Roles ="Superadmin, Admin")]
         [HttpGet]
         public async Task<IActionResult> DepartmanUpdate(int departmanId)
         {
             var departman = await departmanService.GetDepartmanById(departmanId);
             return View(departman);
         }
+
+        [Authorize(Roles = "Superadmin, Admin")]
         [HttpPost]
         public async Task<IActionResult> DepartmanUpdate(DepartmanDto departmanDto)
         {
@@ -74,6 +81,8 @@ namespace PayrollManagementSys.Web.Controllers
             }
             return View(departman);
         }
+
+        [Authorize(Roles = "Superadmin, Admin")]
         public async Task<IActionResult> DepartmanDelete(int departmanId)
         {
             await departmanService.DepartmanSafeDeleteAsync(departmanId);

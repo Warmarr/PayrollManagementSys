@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PayrollManagementSys.Entity.DTOs.Employees;
 using PayrollManagementSys.Entity.Entities;
@@ -21,6 +22,7 @@ namespace PayrollManagementSys.Web.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(EmployeeLoginDto employeeLoginDto)
         {
@@ -41,7 +43,7 @@ namespace PayrollManagementSys.Web.Controllers
                         {
                             authClaims.Add(new Claim(ClaimTypes.Role,userRole));
                         }
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Dashboard");
                     }
                     else
                     {
@@ -59,7 +61,26 @@ namespace PayrollManagementSys.Web.Controllers
             {
                 return View();
             }
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> AccessDenied()
+        {
             return View();
+        }
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> NotFound()
+        {
+            return View();
+        }
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Auth");
         }
     }
 }

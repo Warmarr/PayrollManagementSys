@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PayrollManagementSys.Entity.DTOs.Salaries
@@ -18,5 +19,6 @@ namespace PayrollManagementSys.Entity.DTOs.Salaries
         public DateTime SalaryDate { get; set; }
         public WorkDay workDay { get; set; }
         public EmployeeDto User { get; set; }
+     
     }
 }

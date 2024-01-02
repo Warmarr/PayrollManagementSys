@@ -25,10 +25,10 @@ namespace PayrollManagementSys.Service.Services.Concrete
             var paymentInfo = await unitOfWork.GetRepository<PaymentInfo>().GetPayrollAsync(personelId, istenilenAy, istenilenYıl);
             return paymentInfo;
         }
-        public async Task<MemoryStream> CreatePayrollAsync(double payment)
-        {
-            var payroll = await pdfHelper.GeneratePdf(payment);
-            return payroll;
-        }
+        //public async Task<MemoryStream> CreatePayrollAsync(double payment)
+        //{
+        //    var payroll = await pdfHelper.GeneratePdf(payment);
+        //    return payroll;
+        //}
     }
 }

@@ -3,23 +3,25 @@ using PayrollManagementSys.Data.Context;
 using PayrollManagementSys.Data.Extensions;
 using PayrollManagementSys.Entity.Entities;
 using PayrollManagementSys.Service.Extensions;
-
-
-
-
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 
 builder.Services.LoadDataLayerExtensions(builder.Configuration);
-
 builder.Services.LoadServiceLayerExtension();
 
+builder.Services.AddSession();
 
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 
 
 
@@ -34,7 +36,7 @@ builder.Services.AddIdentity<AppUser, AppRole>(opt =>
     .AddDefaultTokenProviders();
 
 
-builder.Services.ConfigureExternalCookie(config =>
+builder.Services.ConfigureApplicationCookie(config =>
 {
     config.LoginPath = new PathString("/Auth/Login");
     config.LogoutPath = new PathString("/Auth/Logout");
@@ -61,20 +63,30 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
+
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+app.UseStatusCodePagesWithReExecute("/Auth/NotFound");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Auth}/{action=Login}/{id?}");
+
+app.UseEndpoints(endpoints =>
+{   
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Auth}/{action=Login}/{id?}");
+
+    endpoints.MapDefaultControllerRoute();
+
+});
+
 
 app.Run();

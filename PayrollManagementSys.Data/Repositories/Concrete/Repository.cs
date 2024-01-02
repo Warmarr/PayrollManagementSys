@@ -222,6 +222,44 @@ namespace PayrollManagementSys.Data.Repositories.Concrete
 
             return result;
         }
+        public async Task<List<AverageSalaryByDepartment>> GetAverageSalaryByDepartmentAsync()
+        {
+            var result = await dbContext.AverageSalaryByDepartments
+                            .Select(a => new
+                            {
+                                AverageSalary = (double)a.AverageSalary,
+                                a.DepertmanId
+                                // Include other properties if needed
+                            })
+                            .ToListAsync();
+
+            var averageSalaries = result.Select(a => new AverageSalaryByDepartment
+            {
+                AverageSalary = (float)a.AverageSalary,
+                DepertmanId = a.DepertmanId
+                // Map other properties if needed
+            }).ToList();
+            return averageSalaries;
+
+        }
+        public async Task<int> GetTotalEmployeeAsync()
+        {
+
+            var result = await dbContext.TotalEmployees
+                .FromSqlRaw("SELECT TOP (1) TotalEmployeeCount FROM TotalEmployees")
+                .FirstOrDefaultAsync();
+
+            return result.TotalEmployeeCount;
+        }
+        public async Task<int> GetTotalDepartmanAsync()
+        {
+
+            var result = await dbContext.TotalDepartmanCounts
+                .FromSqlRaw("SELECT TOP (1) ActiveDepartmanCount FROM TotalDepartmanCount")
+                .FirstOrDefaultAsync();
+
+            return result.ActiveDepartmanCount;
+        }
 
     }
 }

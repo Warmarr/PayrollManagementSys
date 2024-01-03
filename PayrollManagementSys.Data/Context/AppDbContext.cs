@@ -33,6 +33,7 @@ namespace PayrollManagementSys.Data.Context
         public DbSet<TotalEmployees> TotalEmployees { get; set; }
 
         public DbSet<TotalDepartmanCount> TotalDepartmanCounts { get; set; }
+        public DbSet<GenderCountsView> GenderCountsViews { get; set; }
 
 
         [DbFunction("dbo", "GetMonthlyPayrollForEmployee")]
@@ -49,11 +50,11 @@ namespace PayrollManagementSys.Data.Context
             builder
                 .Entity<AverageSalaryByDepartment>(eb =>
                 {
-                    eb.HasNoKey(); 
+                    eb.HasNoKey();
                     eb.ToView("AverageSalaryByDepartment");
 
                     eb.Property(v => v.DepertmanId).HasColumnName("DepertmanId");
-                    eb.Property(v => v.AverageSalary).HasColumnName("AverageSalary"); 
+                    eb.Property(v => v.AverageSalary).HasColumnName("AverageSalary");
                 });
 
             builder
@@ -69,6 +70,15 @@ namespace PayrollManagementSys.Data.Context
                 eb.HasNoKey();
                 eb.ToView("TotalDepartmanCount");
                 eb.Property(v => v.ActiveDepartmanCount).HasColumnName("ActiveDepartmanCount");
+            });
+            builder.Entity<GenderCountsView>(eb =>
+            {
+                eb.HasNoKey();
+                eb.ToView("GenderCountsView");
+
+                eb.Property(v => v.MaleCount).HasColumnName("MaleCount");
+                eb.Property(v => v.FemaleCount).HasColumnName("FemaleCount");
+
             });
 
 

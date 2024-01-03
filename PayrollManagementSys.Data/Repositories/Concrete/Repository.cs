@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -158,7 +159,7 @@ namespace PayrollManagementSys.Data.Repositories.Concrete
         public async Task<int> GetLastEmployeeIdAsync()
         {
 
-            var result = await dbContext.Users.OrderByDescending(x => x.Id).Select(x=>x.Id).FirstOrDefaultAsync();
+            var result = await dbContext.Users.OrderByDescending(x => x.Id).Select(x => x.Id).FirstOrDefaultAsync();
             return result;
 
         }
@@ -177,17 +178,16 @@ namespace PayrollManagementSys.Data.Repositories.Concrete
             };
 
             await dbContext.Database.ExecuteSqlRawAsync("EXECUTE InsertSalary @PersonelId,@SalaryCoefficient,@TaxDeduction,@SgkDeduction,@SalaryDate,@AdditionalPayments,@RowsAffected OUTPUT", parameters:
-                new[] { personelIdParam, salaryCoeParam, taxDeductionParam, sgkDeductionParam, salaryDateParam,additionalPayment,rowsAffectedParam });
+                new[] { personelIdParam, salaryCoeParam, taxDeductionParam, sgkDeductionParam, salaryDateParam, additionalPayment, rowsAffectedParam });
 
             var rowsAffectedValue = (int)rowsAffectedParam.Value;
             return rowsAffectedValue;
-
 
         }
         public async Task<int> InsertWorkDayAsync(int personelId, DateTime? workDate, double? workTime)
         {
             var personelIdParam = new SqlParameter("@PersonelId", personelId);
-            var workDateParam = new SqlParameter("@WorkDate", workDate);  
+            var workDateParam = new SqlParameter("@WorkDate", workDate);
             var workTimeParam = new SqlParameter("@WorkTime", workTime);
 
             var rowsAffectedParam = new SqlParameter("@RowsAffected", SqlDbType.Int)
@@ -214,7 +214,7 @@ namespace PayrollManagementSys.Data.Repositories.Concrete
             var roleParam = new SqlParameter("@RoleName", roleName);
             await dbContext.Database.ExecuteSqlRawAsync("EXECUTE InsertRole @RoleName", parameters: new[] { roleName });
         }
-        public async Task<PaymentInfo> GetPayrollAsync(int personelId,int istenilenAy,int istenilenYıl)
+        public async Task<PaymentInfo> GetPayrollAsync(int personelId, int istenilenAy, int istenilenYıl)
         {
             var result = await dbContext.PaymentInfos
                             .FromSqlRaw("SELECT * FROM dbo.GetMonthlyPayrollForEmployee({0},{1},{2})", personelId, istenilenAy, istenilenYıl)
@@ -240,6 +240,25 @@ namespace PayrollManagementSys.Data.Repositories.Concrete
                 // Map other properties if needed
             }).ToList();
             return averageSalaries;
+
+        }
+        public async Task<List<GenderCountsView>> GetGenderCountsViewsAsync()
+        {
+            var result = await dbContext.GenderCountsViews.Select(v => new
+            {
+                v.MaleCount,
+                v.FemaleCount
+            }).ToListAsync();
+
+            var genderCounts = result.Select(a => new GenderCountsView
+            {
+                MaleCount = a.MaleCount,
+                FemaleCount = a.FemaleCount
+                // Map other properties if needed
+            }).ToList();
+
+
+            return genderCounts;
 
         }
         public async Task<int> GetTotalEmployeeAsync()

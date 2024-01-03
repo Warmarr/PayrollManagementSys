@@ -27,6 +27,13 @@ namespace PayrollManagementSys.Web.Controllers
             return Json(salaryByDepartman);
         }
         [HttpGet]
+        public async Task<IActionResult> GetGenderCounts()
+        {
+            List<GenderCountsView> genderCounts = await dashboardService.GetGenderCountsViews();
+
+            return Json(genderCounts);
+        }
+        [HttpGet]
         public async Task<IActionResult> GetTotalEmployee()
         {
             var count = await dashboardService.GetTotalEmployee();

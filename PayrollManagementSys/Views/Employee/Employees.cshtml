@@ -21,7 +21,7 @@
 
 <a class="btn btn-primary mb-4" href="/Employee/EmployeeAdd">Çalışan Ekle</a>
 
-<div b-4cazk3bw56 class="card">
+<div b-4cazk3bw56 class="card" style="padding: 5px;">
     <table id="employeesTable" class="table table-striped" style="width:100%">
         <thead>
             <tr>
@@ -60,7 +60,17 @@
                     <td><span class="@Color">@(item.IsDeleted ? "Pasif" : "Aktif")</span></td>
 
                     <td>
-                        <a style="color:white;" class="btn btn-warning" data-id="@item.Id" asp-controller="Employee" asp-action="EmployeeUpdate" asp-route-employeeId="@item.Id"><i class="fas fa-edit"></i>Düzenle</a>
+                        @if (item.IsDeleted == false)
+                        {
+                            <a style="color:white;" class="btn btn-warning" data-id="@item.Id" asp-controller="Employee" asp-action="EmployeeUpdate" asp-route-employeeId="@item.Id"><i class="fas fa-edit"></i>Düzenle</a>
+
+                        }
+                        else
+                        {
+                            <a style="color:white;" class="btn btn-warning disabled" data-id="@item.Id" asp-controller="Employee" asp-action="EmployeeUpdate" asp-route-employeeId="@item.Id"><i class="fas fa-edit"></i>Düzenle</a>
+
+                        }
+
 
                     </td>
                     <td>
@@ -71,7 +81,7 @@
                         }
                         else
                         {
-                            <a style="color:white;" disabled class="btn btn-danger" data-id="@item.Id" asp-controller="Employee" asp-action="EmployeeDelete" asp-route-userId="@item.Id"><i class="fas fa-trash"></i>Sil</a>
+                            <a style="color:white;" disabled class="btn btn-danger disabled" data-id="@item.Id" asp-controller="Employee" asp-action="EmployeeDelete" asp-route-userId="@item.Id"><i class="fas fa-trash"></i>Sil</a>
 
                         }
                     </td>

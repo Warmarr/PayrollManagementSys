@@ -62,7 +62,7 @@ namespace PayrollManagementSys.Web.Controllers
             if (salaryAmount != null)
             {
                 byte[] documentBytes = pdfHelper.GenerateInvoice(salaryAmount);
-                return File(documentBytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "Invoice.docx");
+                return File(documentBytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", $"{salaryAddDto.User.FirstName}_{salaryAddDto.User.LastName}_Bordo.docx");
             }
             else
             {
@@ -97,7 +97,7 @@ namespace PayrollManagementSys.Web.Controllers
             if (salaryAmount != null)
             {
                 byte[] documentBytes = pdfHelper.GenerateInvoice(salaryAmount);
-                return File(documentBytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "Invoice.docx");
+                return File(documentBytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", $"{salaryAddDto.User.FirstName}_{salaryAddDto.User.LastName}_Bordo.docx");
             }
             else
             {

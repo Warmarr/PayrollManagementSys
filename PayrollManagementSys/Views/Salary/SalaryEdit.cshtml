@@ -13,7 +13,7 @@
 
         <div asp-validation-summary="ModelOnly"></div>
 
-        <input type="text" asp-for="WorkDay.PersonelId" />
+        <input type="hidden" asp-for="WorkDay.PersonelId" />
         <div class="form-group">
             <label asp-for="WorkDay.WorkDate" id="defaultFormControlInput" class="form-label">Tarih</label>
             <input asp-for="WorkDay.WorkDate" type="date" class="form-control mb-3" id="defaultFormControlInput" placeholder="Tarih" aria-describedby="defaultFormControlHelp">

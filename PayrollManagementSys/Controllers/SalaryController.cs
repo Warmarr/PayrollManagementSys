@@ -84,7 +84,7 @@ namespace PayrollManagementSys.Web.Controllers
                 
                 if (isSuccessSalary)
                 {
-                    return RedirectToAction("Index", "Home"); // Adjust as needed
+                    return RedirectToAction("EmployeSalary", "Salary"); // Adjust as needed
 
                 }
                 else 
@@ -96,7 +96,7 @@ namespace PayrollManagementSys.Web.Controllers
             else
             {
                 // Return an error response or handle the error in some way
-                TempData["Error"] = "AYNI AY VE YILDA ÇALISMA ZAMANI EKLENEMEZ!";
+                TempData["Error"] = "AYNI AY VE YILDA CALISMA ZAMANI EKLENEMEZ!";
                 return View(viewModel1); // Adjust as needed
             }
 

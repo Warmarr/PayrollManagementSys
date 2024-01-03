@@ -34,6 +34,7 @@ namespace PayrollManagementSys.Data.Repositories.Abstract
         Task<List<AverageSalaryByDepartment>> GetAverageSalaryByDepartmentAsync();
         Task<int> GetTotalEmployeeAsync();
         Task<int> GetTotalDepartmanAsync();
+        Task<List<GenderCountsView>> GetGenderCountsViewsAsync();
 
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PayrollManagementSys.Service.Services.Concrete
 {
-    public class DashboardService: IDashboardService
+    public class DashboardService : IDashboardService
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -24,7 +24,7 @@ namespace PayrollManagementSys.Service.Services.Concrete
             {
                 var averageSalary = await unitOfWork.GetRepository<AverageSalaryByDepartment>().GetAverageSalaryByDepartmentAsync();
 
-                
+
 
                 return averageSalary;
             }
@@ -34,7 +34,13 @@ namespace PayrollManagementSys.Service.Services.Concrete
                 throw; // Rethrow the exception
             }
         }
+        public async Task<List<GenderCountsView>> GetGenderCountsViews()
+        {
+            var genderCounts = await unitOfWork.GetRepository<GenderCountsView>().GetGenderCountsViewsAsync();
+            return genderCounts;
 
+
+        }
         public async Task<int> GetTotalEmployee()
         {
             var totalemployee = await unitOfWork.GetRepository<TotalEmployees>().GetTotalEmployeeAsync();

@@ -1,0 +1,19 @@
+﻿/* app-dark-login.css */
+
+.dark-theme {
+    background-color: #1c1c1c; /* Dark background color */
+    color: #fff; /* Light text color */
+}
+
+    .dark-theme input {
+        background-color: #2c2c2c; /* Dark input background color */
+        color: #fff; /* Light input text color */
+        border-color: #4d4d4d; /* Medium border color */
+    }
+
+    .dark-theme button {
+        background-color: #3498db; /* Button background color */
+        color: #fff; /* Button text color */
+    }
+
+/* Add more styles as needed */

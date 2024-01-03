@@ -22,10 +22,8 @@ namespace PayrollManagementSys.Service.Helpers
                     mainPart.Document = new Document();
                     Body body = mainPart.Document.AppendChild(new Body());
 
-                    // Fatura başlığı
                     Paragraph title = body.AppendChild(new Paragraph(new Run(new Text("Bordo"))));
 
-                    // Fatura detayları tablosu
                     Table table = new Table(
                         new TableProperties(
                             new TableBorders(
@@ -72,14 +70,11 @@ namespace PayrollManagementSys.Service.Helpers
                         $"{paymentInfo.TaxDeduction}", $"{paymentInfo.SgkDeduction}", $"{paymentInfo.AdditionalPayments}"));
                    
 
-                    // Belgeye tabloyu ekle
                     body.AppendChild(table);
 
-                    // Belgeyi kaydet
                     mainPart.Document.Save();
                 }
 
-                // MemoryStream'deki veriyi byte dizisine çevir
                 return stream.ToArray();
             }
 

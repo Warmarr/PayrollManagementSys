@@ -14,5 +14,6 @@ namespace PayrollManagementSys.Service.Services.Abstract
 
         Task<int> GetTotalEmployee();
         Task<int> GetTotalDepartman();
+        Task<List<GenderCountsView>> GetGenderCountsViews();
     }
 }

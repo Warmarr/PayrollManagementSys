@@ -36,8 +36,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
-
     <link rel="stylesheet" href="~/dist/assets/compiled/css/app.css">
     <link rel="stylesheet" href="~/dist/assets/compiled/css/app-dark.css">
     <link rel="stylesheet" href="~/dist/assets/compiled/css/iconly.css">
@@ -103,13 +101,12 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Bar Chart</h4>
+                            <h4 class="card-title">Departman Ortalama Maaş</h4>
                         </div>
                         <div class="card-body">
                             <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
@@ -172,7 +169,7 @@
                 data: {
                     labels: data.map(item => item.depertmanId),
                     datasets: [{
-                        label: 'Average Salary',
+                        label: 'Ortalama Maaş',
                         data: data.map(item => item.averageSalary),
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         borderColor: 'rgba(75, 192, 192, 1)',
@@ -192,7 +189,7 @@
                             beginAtZero: true,
                             title: {
                                 display: true,
-                                text: 'Average Salary'
+                                text: 'Ortalama Maaş'
                             }
                         }
                     }
